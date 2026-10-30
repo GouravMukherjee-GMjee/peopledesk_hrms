@@ -1,0 +1,138 @@
+/* ---------- tables: sticky first column, bulk bar, density, column menu ---------- */
+.tw table th:first-child,
+.tw table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--surface);
+  box-shadow: 1px 0 0 var(--line);
+}
+.tw table th:first-child {
+  background: var(--surface2);
+  z-index: 3;
+}
+.tw table tr:hover td:first-child {
+  background: var(--surface2);
+}
+.tw table tr.today td:first-child {
+  background: var(--brand-soft);
+}
+.selw {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: -4px 4px -4px -6px;
+  vertical-align: middle;
+  flex: none;
+}
+.selc {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--brand);
+  cursor: pointer;
+  margin: 0;
+}
+.selbar {
+  position: fixed;
+  left: calc(50% + var(--sw) / 2);
+  transform: translateX(-50%);
+  bottom: 24px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 8px 10px 8px 16px;
+  box-shadow: var(--ring), var(--shadow-lg);
+  animation: selin 0.18s ease-out;
+}
+@keyframes selin {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+}
+.selbar b {
+  margin-right: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .selbar {
+    left: 50%;
+    bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+    max-width: calc(100vw - 24px);
+  }
+  .rt:not(.keep) td:first-child {
+    position: static;
+    box-shadow: none;
+  }
+}
+td {
+  padding: var(--ty, 9px) 12px;
+}
+th {
+  padding: var(--thy, 7px) 12px;
+}
+.li {
+  padding: var(--li, 8px) 0;
+}
+html[data-density="compact"] {
+  --ty: 5px;
+  --thy: 5px;
+  --li: 5px;
+}
+html[data-density="comfortable"] {
+  --ty: 14px;
+  --thy: 10px;
+  --li: 12px;
+}
+.colw {
+  position: relative;
+  display: inline-flex;
+}
+.colpop {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 20;
+  min-width: 190px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: var(--ring), var(--shadow-lg);
+  display: grid;
+  gap: 6px;
+}
+.colrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  padding: 4px 2px;
+  cursor: pointer;
+}
+.colrow input {
+  accent-color: var(--brand);
+  width: 16px;
+  height: 16px;
+}
+@media (max-width: 900px) {
+  .colw {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .selbar {
+    animation: none;
+  }
+}

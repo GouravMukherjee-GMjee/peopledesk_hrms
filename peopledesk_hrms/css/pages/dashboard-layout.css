@@ -1,0 +1,99 @@
+/* One rule for every card row: cards that sit side by side are the same height (the row is as tall as its tallest card). */
+.dashboard-view {
+  container-type: inline-size;
+}
+.dashboard-view > .row.c3 {
+  align-items: stretch;
+}
+.dashboard-view > .row.c3 > :last-child:nth-child(odd) {
+  grid-column: auto;
+}
+.dashboard-view > .attn > .att:last-child:nth-child(odd) {
+  grid-column: auto;
+}
+.dashboard-widgets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 370px), 1fr));
+  gap: var(--gap);
+  align-items: stretch;
+}
+@container (max-width: 1200px) {
+  .dashboard-view > .attn,
+  .dashboard-view > .row.c3,
+  .dashboard-view > .row.c4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .dashboard-view > .row.c3:has(.apr) .apr-summary .tk {
+    display: none;
+  }
+}
+@container (max-width: 1100px) {
+  .dashboard-view > .row.c3:has(.apr) .apr .cname .cn {
+    display: grid;
+    gap: 0;
+  }
+  .dashboard-view > .row.c3:has(.apr) .apr-summary > span:last-child {
+    white-space: normal;
+    overflow: visible;
+    overflow-wrap: anywhere;
+    text-overflow: clip;
+  }
+}
+@container (max-width: 900px) {
+  .dashboard-view > .row.c3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dashboard-view > .row.c21 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dashboard-widgets {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@container (min-width: 901px) {
+  .dashboard-view > .row.c21 {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  }
+}
+@container (min-width: 1201px) {
+  .dashboard-view > .row.c3:has(.apr) {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.3fr) minmax(0, 1fr);
+  }
+}
+
+/* Dashboard layout: KPIs first, then one main column and one side column so no card leaves a hole beside it. */
+.dashboard-view > .row.ops {
+  align-items: stretch;
+}
+.dashboard-widgets {
+  align-items: stretch;
+}
+.dashboard-widgets > .card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar: items must not shrink (overflow:hidden let group titles collapse and clip), titles read as section labels. */
+.side > * {
+  flex: none;
+}
+.side > .side-nav-scroll {
+  flex: 1 1 0;
+  min-height: 0;
+}
+.gl-t {
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a9b6d3;
+  padding: 14px 12px 4px;
+}
+.side-nav-scroll > .gl-t:first-child {
+  padding-top: 6px;
+}
+
+/* Demo banner removed: nothing reserves space for it. */
+.demobar {
+  display: none;
+}

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Browser extension widget: design spec</title>
+<link rel="stylesheet" href="../css/components/ext-popup.css">
+<style>
+  :root { color-scheme: light dark; --pg: #f2f4f7; --card: #fff; --ink: #1d2535; --mut: #576175; --line: #e0e4eb; --brand: #3969d0; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --pg: #0f1524; --card: #161c2b; --ink: #e8ecf5; --mut: #a9b3c8; --line: #2e3956; --brand: #84a3eb; } }
+  :root[data-theme="dark"] { color-scheme: dark; --pg: #0f1524; --card: #161c2b; --ink: #e8ecf5; --mut: #a9b3c8; --line: #2e3956; --brand: #84a3eb; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--pg); color: var(--ink); font: 15px/1.55 system-ui, "Segoe UI", Inter, sans-serif; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 24px 24px 80px; }
+  a { color: var(--brand); }
+  header.top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; padding: 16px 0 8px; }
+  h1 { font-size: 28px; letter-spacing: -0.02em; margin: 0 0 4px; }
+  h2 { font-size: 21px; letter-spacing: -0.01em; margin: 48px 0 6px; scroll-margin-top: 70px; }
+  h3 { font-size: 15px; margin: 0 0 8px; }
+  p { margin: 0 0 12px; }
+  .mut { color: var(--mut); }
+  .sm { font-size: 13px; }
+  nav.toc { position: sticky; top: 0; z-index: 10; background: var(--pg); border-bottom: 1px solid var(--line); display: flex; gap: 4px 16px; flex-wrap: wrap; padding: 10px 0; font-size: 14px; }
+  button.tgl { font: inherit; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+  button.tgl:focus-visible, a:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+  .grid { display: grid; gap: 24px; }
+  .g-popups { grid-template-columns: repeat(auto-fill, 360px); justify-content: start; }
+  .g-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  figure { margin: 0; }
+  figcaption { font-size: 13px; color: var(--mut); margin-top: 8px; max-width: 360px; }
+  figcaption b { color: var(--ink); }
+  .frame { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 8px 24px rgba(16,24,40,.12); width: 360px; max-width: 100%; }
+  /* flow */
+  .flow { display: flex; flex-wrap: wrap; gap: 14px 38px; align-items: stretch; }
+  .fn { position: relative; width: 168px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  .fn b { display: block; font-size: 14px; }
+  .fn span { font-size: 12.5px; color: var(--mut); }
+  .fn .n { display: inline-flex; width: 22px; height: 22px; border-radius: 50%; background: var(--brand); color: #fff; font-size: 12px; font-weight: 700; align-items: center; justify-content: center; margin-bottom: 6px; }
+  .fn:not(.last)::after { content: "→"; position: absolute; right: -28px; top: 50%; transform: translateY(-50%); color: var(--mut); font-size: 20px; }
+  .fn.gate { border-style: dashed; }
+  .fbranch { margin-top: 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; font-size: 13.5px; }
+  .fbranch div { padding: 10px 14px; border-left: 3px solid var(--line); background: var(--card); border-radius: 0 8px 8px 0; }
+  /* toolbar states */
+  .tb { display: flex; align-items: center; gap: 14px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  .tb .xw-tokens { flex: none; }
+  .tb small { display: block; color: var(--mut); font-size: 12.5px; }
+  .tb b { font-size: 14px; }
+  /* notifications */
+  .nt { width: 100%; max-width: 380px; display: flex; gap: 12px; padding: 14px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); box-shadow: 0 8px 24px rgba(16,24,40,.14); }
+  .nt .ic { width: 40px; height: 40px; flex: none; border-radius: 10px; background: #3969d0; color: #fff; display: flex; align-items: center; justify-content: center; }
+  .nt b { display: block; font-size: 14.5px; }
+  .nt span { font-size: 13.5px; color: var(--mut); }
+  .nt small { display: block; margin-top: 4px; color: var(--mut); font-size: 12px; }
+  /* component library */
+  .cl { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .cl .panel h3 { display: flex; justify-content: space-between; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; margin: 10px 0; }
+  .row small { color: var(--mut); font-size: 12px; width: 100%; margin-bottom: -6px; }
+  .tg { position: relative; width: 40px; height: 24px; display: inline-block; flex: none; }
+  .tg input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; z-index: 1; }
+  .tg i { position: absolute; inset: 0; border-radius: 99px; background: #9aa4b8; transition: .15s; }
+  .tg i::before { content: ""; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: .15s; box-shadow: 0 1px 2px rgba(0,0,0,.3); }
+  .tg input:checked + i { background: var(--xw-brand); }
+  .tg input:checked + i::before { transform: translateX(16px); }
+  .tg input:focus-visible + i { outline: 3px solid var(--xw-focus); outline-offset: 2px; }
+  .tg input:disabled + i { opacity: .45; }
+  .tg.hov i { box-shadow: 0 0 0 4px color-mix(in srgb, var(--xw-brand) 22%, transparent); }
+  .lockbtn { display: inline-flex; gap: 6px; align-items: center; color: var(--mut); }
+  .tipdemo { position: relative; display: inline-block; margin-top: 34px; }
+  .tipdemo .xw-tip { opacity: 1; visibility: visible; right: auto; left: 0; }
+  .ban { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 10px; font-size: 13.5px; width: 100%; background: var(--t-bg); color: var(--t-ink); }
+  .ban svg { flex: none; }
+  .modal { border: 1px solid var(--line); border-radius: 14px; background: var(--card); box-shadow: 0 16px 40px rgba(16,24,40,.2); overflow: hidden; width: 100%; max-width: 420px; }
+  .modal .mh { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--line); font-weight: 650; }
+  .modal .mb { padding: 14px 16px; font-size: 14px; }
+  .modal .mf { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--line); }
+  .modal .mf .xw-btn { width: auto; }
+  .chip { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px 3px 7px; border-radius: 99px; font-size: 12px; font-weight: 600; background: var(--t-bg); color: var(--t-ink); }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--mut); }
+  ul.tight { margin: 0; padding-left: 18px; } ul.tight li { margin-bottom: 6px; }
+  .pal { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pal span { padding: 6px 10px; border-radius: 8px; font-size: 12.5px; font-weight: 600; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  @media (max-width: 640px) { .fn:not(.last)::after { content: none; } .wrap { padding: 16px; } }
+</style>
+</head>
+<body>
+<div class="wrap xw-tokens">
+  <header class="top">
+    <div>
+      <h1>Browser extension widget</h1>
+      <p class="mut" style="max-width:720px">See your clock-in time, expected logout and time left in the browser, without opening PeopleDesk. Controlled by the admin per role, then by each person's own opt-in. This page is the design spec; every popup, badge and notification below is rendered by the same code the real extension runs.</p>
+    </div>
+    <button class="tgl" id="theme" type="button" aria-pressed="false">Dark mode</button>
+  </header>
+  <nav class="toc" aria-label="Sections">
+    <a href="#flow">User flow</a><a href="#screens">Screens in the app</a><a href="#badge">Toolbar badge</a><a href="#popup">Popup</a><a href="#notif">Notifications</a><a href="#lib">Components</a><a href="#a11y">Accessibility</a><a href="#why">Rationale</a>
+  </nav>
+
+  <h2 id="flow">1. User flow</h2>
+  <p class="mut">Effective setting = <b>role policy allows it</b> AND <b>the person has opted in</b>. Either can switch it off, and the organisation switch overrides everything.</p>
+  <div class="panel">
+    <div class="flow" role="list">
+      <div class="fn" role="listitem"><span class="n">1</span><b>Admin sets policy</b><span>Settings, Browser extension: organisation switch, role availability, fields, reminders</span></div>
+      <div class="fn gate" role="listitem"><span class="n">?</span><b>Role allows it?</b><span>No: nothing is shown and the extension says “Not enabled”</span></div>
+      <div class="fn" role="listitem"><span class="n">2</span><b>First login</b><span>Only for roles that allow it</span></div>
+      <div class="fn" role="listitem"><span class="n">3</span><b>Prompt</b><span>“See your logout time without opening HRMS”</span></div>
+      <div class="fn" role="listitem"><span class="n">4</span><b>Install</b><span>Chrome or Edge store</span></div>
+      <div class="fn" role="listitem"><span class="n">5</span><b>Sign in</b><span>Connect to PeopleDesk, success state</span></div>
+      <div class="fn" role="listitem"><span class="n">6</span><b>Choose what to show</b><span>Fields, badge, reminders</span></div>
+      <div class="fn" role="listitem"><span class="n">7</span><b>Badge and popup</b><span>Updates every minute, reminders once a day</span></div>
+      <div class="fn last" role="listitem"><span class="n">8</span><b>Preferences</b><span>Profile, Preferences, Browser extension. Anytime.</span></div>
+    </div>
+    <div class="fbranch">
+      <div><b>Maybe later</b><br>Asks again in a week, at most 3 times.</div>
+      <div><b>Don't ask again</b><br>Never prompts. Still available in Preferences.</div>
+      <div><b>Admin turns it off later</b><br>Preferences shows “Disabled by admin”. The popup shows “Not enabled for your account”.</div>
+    </div>
+  </div>
+
+  <h2 id="screens">2. Screens inside PeopleDesk</h2>
+  <p class="mut">These are built into the app. Open PeopleDesk and sign in, then:</p>
+  <div class="panel"><table>
+    <tr><th>Screen</th><th>Where</th><th>What to look at</th></tr>
+    <tr><td>Admin: Browser extension</td><td>Settings, Browser extension</td><td>Organisation switch, availability per role (Disabled, Allowed, Enabled by default), fields, reminders, privacy note, live preview with state picker, Save and Cancel, unsaved-changes state, audit entry on save.</td></tr>
+    <tr><td>First-login prompt</td><td>Shown after sign-in, if the role allows it</td><td>Toolbar badge illustration, privacy note, Set up now, Maybe later, Don't ask again.</td></tr>
+    <tr><td>Setup, 3 steps</td><td>Prompt, or Preferences, Set up</td><td>Progress indicator, install buttons, connect with failure and demo state, choices, success screen.</td></tr>
+    <tr><td>User preferences</td><td>Profile, Preferences</td><td>Master toggle, field toggles with lock and “Not available for your role”, toolbar badge, reminders, Pause until tomorrow, Sign out of extension, status: Connected, Not installed, Disabled by admin.</td></tr>
+  </table></div>
+
+  <h2 id="badge">3. Toolbar icon and badge</h2>
+  <p class="mut">The badge shows the time left: <b>5h</b> while an hour or more remains, then <b>42m</b>. Hover shows the tooltip. Every state differs by text or by a small shape on the icon, never by colour alone.</p>
+  <div class="grid g-3" id="tb"></div>
+
+  <h2 id="popup">4. Popup, 360 wide, sized to its content</h2>
+  <p class="mut">The one thing you came for is the largest thing on screen. Everything else supports it.</p>
+  <div class="grid g-popups" id="pp"></div>
+  <h3 style="margin-top:28px">Interaction states</h3>
+  <div class="grid g-popups" id="pp2"></div>
+
+  <h2 id="notif">5. Reminder notifications</h2>
+  <p class="mut">Browser notifications, shown once each per day, never sound-alarming, never about performance.</p>
+  <div class="grid g-3" id="nt"></div>
+
+  <h2 id="lib">6. Component library</h2>
+  <div class="cl" id="lib-grid"></div>
+
+  <h2 id="a11y">7. Accessibility annotations</h2>
+  <div class="panel"><table>
+    <tr><th style="width:190px">Topic</th><th>Spec</th></tr>
+    <tr><td>Contrast</td><td>WCAG AA. Body text 4.5:1 or better, large text and UI edges 3:1. Badge colours: white on green, blue, purple and grey; dark text on amber. Checked for light and dark.</td></tr>
+    <tr><td>Not colour alone</td><td>Each state has a text label in the popup, a glyph in the status chip, different badge text (<b>5h</b>, <b>42m</b>, <b>Done</b>, <b>+25m</b>, <b>?</b>) and a different shape on the toolbar icon.</td></tr>
+    <tr><td>Keyboard</td><td>Tab order follows reading order: status, primary action, secondary action. Focus starts on the first button when the popup opens. Enter or Space activates. Escape closes the popup or dialog. The tooltip on “Hide for today” opens on focus as well as hover. Dialogs trap focus and return it to the opener. Settings radios use arrow keys.</td></tr>
+    <tr><td>Labels (ARIA)</td><td>Switches are <code>role="switch"</code> with a name such as “Show in browser”. Progress bar: <code>role="progressbar"</code>, <code>aria-valuenow</code> and <code>aria-valuetext</code> “62 percent of the day. 5 hours 12 minutes left”. Lock icon: <code>aria-label="Not available for your role"</code>, focusable, linked to its tooltip with <code>aria-describedby</code>. Status banners use <code>role="status"</code>; errors <code>role="alert"</code>. Preview frames are <code>role="img"</code> with a text alternative and are <code>inert</code>. Setup stepper marks <code>aria-current="step"</code>.</td></tr>
+    <tr><td>Live updates</td><td>The countdown changes once a minute and is not an <code>aria-live</code> region, so screen readers are not interrupted. Reminders arrive as notifications.</td></tr>
+    <tr><td>Reduced motion</td><td>With <code>prefers-reduced-motion</code>, the loading shimmer, bar growth and tooltip fades are removed. Nothing flashes or auto-plays.</td></tr>
+    <tr><td>Touch and zoom</td><td>Targets are at least 40px tall. Layout holds at 200% zoom; admin screens collapse to one column under 1100px.</td></tr>
+    <tr><td>Language</td><td>Plain, friendly, neutral. “Hide for today”, never “Cancel”. “Your attendance is not affected” is always one hover away.</td></tr>
+  </table></div>
+
+  <h2 id="why">8. Design rationale</h2>
+  <div class="panel"><ul class="tight">
+    <li><b>Two gates, one rule.</b> The admin decides what is possible and the person decides what they want. Showing the rule in plain words (“this role allows it and they have opted in”) avoids support tickets about “why can't I see it”.</li>
+    <li><b>Locked, not hidden.</b> Options a role cannot use stay visible with a lock and “Not available for your role”. Hiding them makes people think something is broken.</li>
+    <li><b>Glanceable in two seconds.</b> One 44px number (expected logout), one bar, one label. Clock-in time and the source tag are secondary. Extra time replaces the countdown instead of adding a second number.</li>
+    <li><b>“Hide for today”, not “Cancel” or “Close”.</b> Those words sound like they cancel attendance. The tooltip says it does not.</li>
+    <li><b>Minute, not second.</b> A ticking seconds counter in the corner of someone's browser feels like surveillance and wastes battery. The badge and popup move once a minute.</li>
+    <li><b>Attendance only, stated everywhere.</b> The prompt, the admin page and the preferences all repeat it. The extension asks for no website access and its manifest asks only for storage, alarms and notifications.</li>
+    <li><b>Calm colour.</b> Green for working, amber for “under 30 minutes”, blue for done, purple for extra time. Overtime is purple, not red, so it never reads as a warning or a fault.</li>
+    <li><b>Works when the app is closed.</b> The extension keeps the clock-in and expected logout and counts down by itself. It does not need PeopleDesk open.</li>
+    <li><b>Honest offline.</b> When data may be old, the popup dims it and says “Last updated 10:30” rather than showing a confident wrong number.</li>
+    <li><b>Reminders are opt-in and bounded.</b> Each shows once a day, the admin sets the menu, the person picks from it, and “Pause until tomorrow” stops all of it without turning it off.</li>
+  </ul></div>
+</div>
+
+<script src="../js/services/ext-core.js"></script>
+<script>
+(function () {
+  const E = PDExt, $ = s => document.querySelector(s);
+  /* theme toggle */
+  const t = $('#theme'), root = document.documentElement;
+  t.onclick = () => {
+    const now = root.dataset.theme === 'dark' || (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches),
+      dark = !now;
+    root.dataset.theme = dark ? 'dark' : 'light';
+    t.textContent = dark ? 'Light mode' : 'Dark mode';
+    t.setAttribute('aria-pressed', dark);
+  };
+
+  const demoModel = k => { const d = E.demo(k); return E.model(d.snap, d.now); };
+  const fig = (html, cap) => `<figure><div class="frame">${html}</div><figcaption>${cap}</figcaption></figure>`;
+
+  /* toolbar */
+  const TB = [
+    ['notin', 'Not clocked in', 'Grey, no number, small clock mark.'],
+    ['working', 'Working', 'Green. Hours while an hour or more remains.'],
+    ['low', 'Under 30 min left', 'Amber with dark text. Minutes.'],
+    ['complete', 'Shift complete', 'Blue. “Done”.'],
+    ['overtime', 'Overtime', 'Purple. “+43m” of extra time.'],
+    ['offline', 'Offline or stale', 'Grey “?” and a wifi-off mark.'],
+    ['disabled', 'Disabled by admin', 'Grey, no number, small lock mark.'],
+    ['paused', 'Paused', 'Grey, no number, pause mark.']
+  ];
+  $('#tb').innerHTML = TB.map(([k, n, d]) => { const m = demoModel(k); return `<div class="tb">${E.toolbarHTML(m)}<div><b>${n}</b><small>${d}</small><small>Hover: “${E.esc(m.tip)}”</small></div></div>`; }).join('');
+
+  /* popups */
+  const PP = [
+    ['working', 'Working', 'Default. Expected logout is the hero; the bar shows time left.'],
+    ['low', 'Under 30 minutes', 'Amber bar and chip, same layout. Nothing new to learn.'],
+    ['complete', 'Shift complete', 'Blue. Shows when you clocked out and total worked.'],
+    ['overtime', 'Overtime', 'Replaces the countdown with extra time, in purple.'],
+    ['notin', 'Empty: not clocked in', 'Tells you what will appear and from where.'],
+    ['empty', 'Empty: not connected', 'First run, before connecting.'],
+    ['loading', 'Loading', 'Shimmer skeleton. Static with reduced motion.'],
+    ['offline', 'Offline', 'Dimmed data and “Last updated 10:30”.'],
+    ['error', 'Error', 'Calm wording, a retry, and reassurance.'],
+    ['disabled', 'Not enabled for your account', 'The admin has not turned it on for this role.'],
+    ['user-off', 'Turned off by you', 'Points to preferences.'],
+    ['paused', 'Paused until tomorrow', 'Pause keeps settings, stops the badge and reminders.'],
+    ['hidden', 'Hidden for today', 'After “Hide for today”. Reversible in one click.']
+  ];
+  $('#pp').innerHTML = PP.map(([k, n, d]) => fig(E.popupHTML(demoModel(k)), `<b>${n}.</b> ${d}`)).join('');
+
+  const hov = demoModel('working');
+  let h = E.popupHTML(hov).replace('class="xw-tip"', 'class="xw-tip" style="opacity:1;visibility:visible"');
+  let dis = E.popupHTML(demoModel('working')).replace(/<button type="button" class="xw-btn ghost" data-act="hide"/, '<button type="button" class="xw-btn ghost" data-act="hide" disabled');
+  let foc = E.popupHTML(demoModel('working')).replace('class="xw-btn primary" data-act="open"', 'class="xw-btn primary" data-act="open" style="outline:3px solid var(--xw-focus);outline-offset:2px"');
+  let brk = E.popupHTML((() => { const d = E.demo('break'); return E.model(d.snap, d.now); })());
+  let ro = (() => { const d = E.demo('working'); d.snap.fields = { clockIn: 0, expectedOut: 0, remaining: 1, breakStatus: 0 }; return E.popupHTML(E.model(d.snap, d.now)); })();
+  $('#pp2').innerHTML = [
+    fig(h, '<b>Hover or focus on “Hide for today”.</b> The tooltip reassures: “Your attendance is not affected”.'),
+    fig(foc, '<b>Keyboard focus.</b> A 3px ring on the primary button; focus starts here.'),
+    fig(dis, '<b>Disabled.</b> 55% opacity and not-allowed cursor, still readable.'),
+    fig(brk, '<b>On a break.</b> Break status is one extra row, only if the role allows it.'),
+    fig(ro, '<b>Fewer fields allowed.</b> If the admin shows only “Time remaining”, the countdown becomes the hero.')
+  ].join('');
+
+  /* notifications */
+  const sn = E.demo('working').snap;
+  const bell = E.ico('clock', 22);
+  const NT = [['in', 'Clock-in confirmation', '9:12 AM'], ['m15', '15 minutes left', '5:57 PM'], ['end', 'Shift complete', '6:12 PM']];
+  $('#nt').innerHTML = NT.map(([k, n, tm]) => { const x = E.notifText(k, sn); return `<figure><div class="nt"><span class="ic">${bell}</span><div><b>${E.esc(x.title)}</b><span>${E.esc(x.message)}</span><small>PeopleDesk Attendance · ${tm}</small></div></div><figcaption><b>${n}.</b> Shown once a day.</figcaption></figure>`; }).join('');
+
+  /* components */
+  const chip = (tone, ico, txt) => `<span class="chip tone-${tone}">${E.ico(ico, 13)}${txt}</span>`;
+  const bar = (tone, p) => `<div class="xw-bar tone-${tone}" style="width:100%" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p}" aria-label="${p} percent"><i style="width:${p}%"></i></div>`;
+  const ban = (tone, ico, txt) => `<div class="ban tone-${tone}" role="status">${E.ico(ico, 18)}<span>${txt}</span></div>`;
+  $('#lib-grid').innerHTML = [
+    ['Toggle', `<div class="row"><small>Off, on, hover, focus, disabled, locked</small>
+      <label class="tg"><input type="checkbox" role="switch" aria-label="Off"><i></i></label>
+      <label class="tg"><input type="checkbox" role="switch" checked aria-label="On"><i></i></label>
+      <label class="tg hov"><input type="checkbox" role="switch" checked aria-label="Hover"><i></i></label>
+      <label class="tg"><input type="checkbox" role="switch" checked disabled aria-label="Disabled"><i></i></label>
+      <span class="lockbtn">${E.ico('lock', 15)}<label class="tg"><input type="checkbox" role="switch" disabled aria-label="Locked"><i></i></label></span></div>
+      <p class="sm mut">40 × 24. Locked adds the lock icon and a tooltip. App class: <code>.sw</code>.</p>`],
+    ['Status badge', `<div class="row">${chip('ok', 'check', 'Working')}${chip('warn', 'clock', 'Under 30 min left')}${chip('info', 'flag', 'Shift complete')}${chip('over', 'trend', 'Extra time')}${chip('mute', 'wifioff', 'Offline')}${chip('mute', 'lock', 'Not enabled')}</div>
+      <p class="sm mut">Always an icon plus a word. App class: <code>.chip</code>, popup <code>.xw-st</code>.</p>`],
+    ['Progress bar', `<div class="row" style="display:grid;gap:12px"><small>Working, amber, shift complete, extra</small>${bar('ok', 62)}${bar('warn', 94)}${bar('info', 100)}</div>
+      <p class="sm mut">10px, rounded, labelled with time left beside it. <code>.xw-bar</code>.</p>`],
+    ['Banner', `<div class="row" style="display:grid;gap:8px">${ban('info', 'plug', '<b>One more step.</b> Add the extension to your browser.')}${ban('warn', 'alert', '<b>Installed, but not signed in.</b>')}${ban('ok', 'check', '<b>Connected.</b>')}${ban('mute', 'wifioff', '<b>You’re offline.</b> Last updated 10:30')}</div>
+      <p class="sm mut">Info, warning, success, neutral. <code>.xa-ban</code>, <code>.xw-ban</code>.</p>`],
+    ['Tooltip', `<div class="tipdemo"><button class="xw-btn" style="width:auto">Hide for today</button><span class="xw-tip" role="tooltip" style="left:0;right:auto">Your attendance is not affected</span></div>
+      <p class="sm mut" style="margin-top:14px">Opens on hover and keyboard focus, linked by <code>aria-describedby</code>. Never holds the only copy of important information.</p>`],
+    ['Modal', `<div class="modal" role="dialog" aria-label="Example"><div class="mh">See your logout time without opening HRMS<span aria-hidden="true">×</span></div><div class="mb">Your clock-in time, expected logout and time left in your toolbar.<br><span class="mut sm">Shows attendance only, nothing else.</span></div><div class="mf"><button class="xw-btn">Maybe later</button><button class="xw-btn primary">Set up now</button></div></div>
+      <p class="sm mut" style="margin-top:10px">Traps focus, closes on Escape, returns focus. App: <code>overlay()</code>.</p>`]
+  ].map(([n, b]) => `<div class="panel"><h3>${n}</h3>${b}</div>`).join('');
+})();
+</script>
+</body>
+</html>

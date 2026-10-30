@@ -1,0 +1,203 @@
+/* ---------- home screens: attendance week/month, team today, approvals ---------- */
+.wk {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: none;
+  padding: 11px 8px;
+  margin: 0;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text);
+  font: inherit;
+  border-radius: 0;
+}
+.wk:last-of-type {
+  border-bottom: 0;
+}
+.wk:hover {
+  background: var(--surface2);
+}
+.wk.today {
+  background: var(--brand-soft);
+}
+.wk .wd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+}
+.wk .wd b {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.wk .wd small {
+  font-size: 18px;
+  font-weight: 700;
+}
+.wk .wc {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.wk .wt {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.wk .wt b {
+  font-weight: 600;
+  font-size: 14px;
+}
+.wk .wt small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.wkfoot {
+  margin-top: 14px;
+}
+.wkfoot .tools {
+  justify-content: space-between;
+  margin: 0 0 6px;
+  font-size: 13px;
+}
+.wkfoot .bar {
+  height: 8px;
+}
+.mstat {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.ms {
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.ms b {
+  font-size: 18px;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+.ms span {
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.ms i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: none;
+}
+.mcard {
+  display: flex;
+  flex-direction: column;
+}
+.mcard .mcal {
+  margin-bottom: 16px;
+}
+.mnext {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+}
+.mnext svg {
+  flex: none;
+  color: var(--amber-ink);
+}
+.mnext b {
+  color: var(--text);
+}
+.mcal {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+.mcal .dh {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  padding: 2px 0;
+}
+.mcal .md {
+  aspect-ratio: 1;
+  min-height: 30px;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  position: relative;
+  background: var(--surface2);
+  color: var(--muted);
+}
+.md.P {
+  background: var(--green-soft);
+  color: var(--green-ink);
+}
+.md.D,
+.md.H {
+  background: var(--amber-soft);
+  color: var(--amber-ink);
+}
+.md.A {
+  background: var(--red-soft);
+  color: var(--red-ink);
+}
+.md.L {
+  background: var(--brand-soft);
+  color: var(--brand-ink);
+}
+.md.F {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+.md.T {
+  background: var(--surface);
+  border: 1px dashed var(--brand);
+  color: var(--text);
+}
+.md.today {
+  box-shadow: 0 0 0 2px var(--brand);
+}
+.md.late::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+.mcal .md:hover {
+  filter: brightness(0.96);
+}

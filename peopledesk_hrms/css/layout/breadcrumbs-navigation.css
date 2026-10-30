@@ -1,0 +1,236 @@
+/* ---------- back navigation ---------- */
+.ph .pt {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  min-width: 0;
+}
+.back-ic svg,
+.mback svg {
+  transform: rotate(180deg);
+}
+.back-ic {
+  margin-top: -1px;
+  color: var(--text);
+}
+.back-ic:hover,
+.mback:hover {
+  background: var(--surface2);
+  border-color: var(--brand);
+  color: var(--brand-ink);
+}
+.mback {
+  background: var(--surface);
+  color: var(--text);
+}
+.back-hint {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  width: 34px;
+  height: 34px;
+  margin-top: -17px;
+  border-radius: 0 99px 99px 0;
+  background: var(--brand);
+  color: var(--on-brand);
+  display: grid;
+  place-items: center;
+  z-index: 70;
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.back-hint.go {
+  animation: bhint 0.45s ease-out;
+}
+.back-hint svg {
+  transform: rotate(180deg);
+}
+@keyframes bhint {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0.9;
+  }
+  35% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* ---------- breadcrumbs, sorting, shortcuts ---------- */
+.phw {
+  display: grid;
+  gap: 10px;
+}
+.crumbs ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--muted);
+}
+.crumbs li {
+  display: flex;
+  align-items: center;
+}
+.crumbs li + li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid var(--line2);
+  border-top: 1.5px solid var(--line2);
+  transform: rotate(45deg);
+  margin: 0 10px 0 6px;
+  flex: none;
+}
+.crumbs button {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 2px 6px;
+  margin: 0 -6px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 13px;
+}
+.crumbs button:hover {
+  color: var(--brand-ink);
+  background: var(--brand-soft);
+}
+.crumbs span {
+  padding: 2px 0;
+}
+.crumbs [aria-current] {
+  color: var(--text);
+  font-weight: 600;
+}
+.thb {
+  min-height: 24px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 0;
+  white-space: nowrap;
+}
+.thb:hover {
+  color: var(--text);
+}
+.sar {
+  display: grid;
+  opacity: 0.35;
+  transition: transform 0.15s;
+}
+th[aria-sort="ascending"] .sar,
+th[aria-sort="descending"] .sar {
+  opacity: 1;
+  color: var(--brand-ink);
+}
+th[aria-sort="ascending"] .sar {
+  transform: rotate(180deg);
+}
+th[aria-sort="ascending"],
+th[aria-sort="descending"] {
+  color: var(--text);
+}
+.rt td[data-act] .btn + .btn {
+  margin-left: 6px;
+}
+.lg-note {
+  background: var(--brand-soft);
+  color: var(--brand-ink);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin: 16px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.keys {
+  display: grid;
+  gap: 0;
+}
+.keys .li {
+  padding: 11px 0;
+}
+.keys kbd {
+  margin-left: 4px;
+}
+.cnt {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -0.5px;
+}
+
+.crumbs button[aria-haspopup] {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.crumbs button[aria-haspopup] svg {
+  transition: transform 0.15s;
+  margin-right: -2px;
+}
+.crumbs button[aria-expanded="true"] {
+  background: var(--brand-soft);
+  color: var(--brand-ink);
+}
+.crumbs button[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+.cm {
+  padding: 6px;
+  min-width: 210px;
+  animation: pop 0.12s ease-out;
+}
+.cm-i {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  border: 0;
+  background: none;
+  padding: 9px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text);
+  font-weight: 500;
+  text-align: left;
+  font-size: 14px;
+}
+.cm-i svg {
+  color: var(--muted);
+  flex: none;
+}
+.cm-i:hover,
+.cm-i:focus-visible {
+  background: var(--surface2);
+  outline: none;
+}
+.cm-i.on {
+  background: var(--brand-soft);
+  color: var(--brand-ink);
+  font-weight: 600;
+}
+.cm-i.on svg {
+  color: var(--brand-ink);
+}
+.cm-i .ck {
+  margin-left: auto;
+}

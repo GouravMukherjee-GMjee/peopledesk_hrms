@@ -1,0 +1,135 @@
+/* segmented, tabs */
+.tabs {
+  display: flex;
+  gap: 2px;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 3px;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.tab {
+  min-height: 28px;
+  border: 0;
+  background: transparent;
+  min-height: 32px;
+  padding: 4px 13px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.tab:hover {
+  color: var(--text);
+}
+.tab.on {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 3px rgba(16, 32, 64, 0.12);
+}
+.ut {
+  display: flex;
+  gap: 18px;
+  border-bottom: 1px solid var(--line);
+  margin: 0 0 12px;
+  overflow-x: auto;
+}
+.ut button {
+  border: 0;
+  background: none;
+  padding: 8px 0;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+}
+.ut button.on {
+  color: var(--brand-ink);
+  border-color: var(--brand);
+}
+/* forms */
+.field {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 12px;
+  align-content: start;
+}
+.field label {
+  font-weight: 600;
+  font-size: 13px;
+}
+.field input,
+.field select,
+.field textarea {
+  border: 1px solid var(--line2);
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 9px 12px;
+  width: 100%;
+  min-height: 36px;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus,
+.sbox:focus-within {
+  outline: 2px solid var(--brand);
+  outline-offset: 0;
+  border-color: var(--brand);
+}
+.field [aria-invalid="true"] {
+  border-color: var(--red);
+}
+.err {
+  color: var(--red-ink);
+  font-size: 13px;
+  min-height: 0;
+}
+.hint {
+  color: var(--muted);
+  font-size: 13px;
+}
+.fg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 12px;
+}
+.fg .full {
+  grid-column: 1/-1;
+}
+.tools {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.tools .grow {
+  flex: 1;
+}
+.sbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line2);
+  border-radius: 10px;
+  padding: 0 12px;
+  min-height: 36px;
+  color: var(--muted);
+  min-width: 190px;
+  flex: 1 1 220px;
+  max-width: 360px;
+}
+.sbox input {
+  border: 0;
+  background: transparent;
+  outline: 0;
+  width: 100%;
+  color: var(--text);
+  min-height: 34px;
+}

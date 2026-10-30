@@ -1,0 +1,140 @@
+/* sidebar */
+.side {
+  background: var(--side);
+  color: var(--side-text);
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  height: 100dvh;
+  overflow: hidden;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.side-nav-scroll {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.side-nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+.logo {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 12px;
+  padding: 2px 8px 12px;
+  color: #fff;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  border-radius: 10px;
+}
+.ltile {
+  display: grid;
+  place-items: center;
+  flex: none;
+  background: #fff;
+  border-radius: 24%;
+  box-shadow: 0 1px 3px rgba(8, 16, 36, 0.28);
+}
+.person .ltile.co,
+.ltile.co {
+  display: grid;
+  place-items: center;
+  background: var(--brand-soft);
+  color: var(--brand-ink);
+  font-weight: 700;
+  box-shadow: none;
+  border: 1px solid var(--line);
+}
+.lw {
+  display: inline-flex;
+  align-items: center;
+}
+.person .ltile.co {
+  color: var(--brand-ink);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.logo .lw,
+.lg-brand .lw {
+  color: #fff;
+}
+.mlogo .lw {
+  color: var(--text);
+}
+.gl-t {
+  font-size: 12px;
+  color: #98a7c6;
+  padding: 10px 12px 2px;
+  font-weight: 600;
+}
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--side-text);
+  cursor: pointer;
+  text-align: left;
+  font-weight: 500;
+  position: relative;
+}
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+.nav-btn.on {
+  background: rgba(255, 255, 255, 0.13);
+  color: #fff;
+}
+.nav-btn.on::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 9px;
+  bottom: 9px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #86d8ce;
+}
+.nav-btn .bd {
+  margin-left: auto;
+  background: #86d8ce;
+  color: #16304a;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 7px;
+  min-width: 20px;
+  text-align: center;
+}
+.app.col .nl,
+.app.col .gl-t,
+.app.col .logo .lw,
+.app.col .bd {
+  display: none;
+}
+.app.col .nav-btn {
+  justify-content: center;
+  padding: 8px;
+}
+.app.col .nav-btn.on::before {
+  left: -12px;
+}
+.app.col .logo {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}

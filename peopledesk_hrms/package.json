@@ -1,0 +1,15 @@
+{
+  "name": "people-desk-hrms",
+  "version": "2.1.0",
+  "private": true,
+  "description": "PeopleDesk HRMS: attendance, leave, payroll, shifts, safety and training for office and plant teams.",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "format": "prettier --write \"js/**/*.js\" \"css/**/*.css\" \"scripts/**/*.js\"",
+    "format:check": "prettier --check \"js/**/*.js\" \"css/**/*.css\" \"scripts/**/*.js\"",
+    "build:ext": "node scripts/build-extension.js"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}

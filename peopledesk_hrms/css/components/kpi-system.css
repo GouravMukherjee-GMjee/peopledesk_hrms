@@ -1,0 +1,199 @@
+/* ---------- KPI cards: one system for every stat card ---------- */
+.card[class*=" k-"] {
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--kt) 82%, var(--surface)) 0%,
+    color-mix(in srgb, var(--kt) 34%, var(--surface)) 100%
+  );
+}
+.card.kpi {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--pad);
+  overflow: hidden;
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    border-color 0.16s ease;
+}
+.card.kpi.clk:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ring), var(--shadow-md);
+}
+.card.kpi .kh {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  margin-bottom: 14px;
+}
+.card.kpi .ki {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  flex: none;
+  background: var(--kb, var(--brand));
+  color: var(--surface);
+  box-shadow:
+    0 2px 6px color-mix(in srgb, var(--kb, var(--brand)) 35%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+.card.kpi .ki svg {
+  width: 20px;
+  height: 20px;
+}
+.card.kpi .kl {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1.25;
+  min-width: 0;
+}
+.card.kpi .kn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  flex-wrap: wrap;
+}
+.card.kpi .n {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.card.kpi .n small {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.card.kpi .kp .pill {
+  font-size: 13px;
+  padding: 3px 10px;
+  gap: 4px;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(16, 32, 64, 0.08);
+}
+.card.kpi .kp .pill svg {
+  width: 14px;
+  height: 14px;
+}
+.card.kpi .kp .pill.neu {
+  border-color: transparent;
+}
+.card.kpi .kd {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+.card.kpi .kf {
+  margin-top: auto;
+  padding-top: 14px;
+}
+.card.kpi .sp {
+  position: relative;
+  height: 60px;
+  margin: 0 calc(var(--pad) * -1) calc(var(--pad) * -1);
+}
+.card.kpi .sp svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(100% - 16px);
+  height: 100%;
+  color: var(--sc, var(--brand));
+  overflow: visible;
+}
+.card.kpi .sp {
+  animation: kfade 0.6s ease both;
+}
+.card.kpi .sp .sp-dot {
+  position: absolute;
+  right: 16px;
+  width: 10px;
+  height: 10px;
+  margin: -5px -5px 0 0;
+  border-radius: 50%;
+  background: var(--sc, var(--brand));
+  box-shadow:
+    0 0 0 3px var(--surface),
+    0 0 0 5px color-mix(in srgb, var(--sc, var(--brand)) 30%, transparent);
+}
+.card.kpi .kb {
+  height: 8px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--kb, var(--brand)) 18%, var(--surface));
+  overflow: hidden;
+}
+.card.kpi .kb i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: var(--kb, var(--brand));
+}
+.card.kpi .kbl {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.lvc .ring svg {
+  width: 88px;
+  height: 88px;
+}
+@keyframes kfade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card.kpi .sp {
+    animation: none;
+  }
+  .card.kpi.clk:hover {
+    transform: none;
+  }
+}
+@media (max-width: 520px) {
+  .card.kpi .ki {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+  }
+  .card.kpi .ki svg {
+    width: 16px;
+    height: 16px;
+  }
+  .card.kpi .kh {
+    gap: 8px;
+    margin-bottom: 10px;
+    min-height: 34px;
+  }
+  .card.kpi .kl {
+    font-size: 13px;
+  }
+  .card.kpi .n {
+    font-size: 22px;
+  }
+  .card.kpi .kp .pill {
+    font-size: 12px;
+    padding: 2px 8px;
+  }
+  .card.kpi .sp {
+    height: 48px;
+  }
+  .card.kpi .kf {
+    padding-top: 10px;
+  }
+}

@@ -1,0 +1,119 @@
+/* ---------- design system: elevation, emphasis, motion ---------- */
+.card {
+  box-shadow: var(--ring), var(--shadow-sm);
+}
+.card.kpi,
+.card.mini {
+  box-shadow: var(--ring), var(--shadow-xs);
+}
+.qa button,
+.att {
+  box-shadow: var(--shadow-xs);
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease,
+    border-color 0.15s ease;
+}
+.qa button:hover,
+.att:hover {
+  box-shadow: var(--ring), var(--shadow-md);
+  transform: translateY(-1px);
+}
+.modal {
+  box-shadow: var(--ring), var(--shadow-lg);
+}
+.dd-pop {
+  box-shadow: var(--ring), var(--shadow-lg);
+}
+.att.crit {
+  border-color: color-mix(in srgb, var(--red) 38%, var(--line));
+  background: color-mix(in srgb, var(--red-soft) 55%, var(--surface));
+  box-shadow:
+    inset 3px 0 0 var(--red),
+    var(--shadow-xs);
+}
+.li.crit {
+  box-shadow: inset 3px 0 0 var(--red);
+  padding-left: 10px;
+  border-radius: 6px;
+}
+.chip.bad {
+  font-weight: 700;
+}
+@keyframes pgin {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.enter {
+  animation: pgin 0.16s ease-out;
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+  }
+  60% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.pop {
+  animation: pop 0.35s ease-out;
+}
+.toast svg {
+  animation: pop 0.4s ease-out;
+}
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+.skeleton {
+  display: block;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--surface2) 25%, var(--line) 37%, var(--surface2) 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  min-height: 12px;
+}
+.pgback {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--brand-ink);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+@media (max-width: 900px) {
+  .pgback {
+    display: inline-flex;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .enter,
+  .pop,
+  .toast svg,
+  .skeleton {
+    animation: none !important;
+  }
+  .qa button:hover,
+  .att:hover {
+    transform: none;
+  }
+}

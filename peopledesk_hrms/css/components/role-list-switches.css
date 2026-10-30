@@ -1,0 +1,95 @@
+/* ---------- v42: role list, switches stay switches ---------- */
+.sw input[type="checkbox"]::after,
+.sw input[type="checkbox"]:checked::after,
+.sw input[type="checkbox"]:indeterminate::after {
+  content: none !important;
+}
+.rolegrp.rolelist {
+  display: grid;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.rolec.rl {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  width: 100%;
+  padding: 10px 12px;
+  min-height: 56px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  cursor: pointer;
+  height: auto;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.rolec.rl:hover {
+  border-color: var(--brand);
+}
+.rolec.rl[aria-checked="true"] {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  box-shadow: 0 0 0 1px var(--brand);
+}
+.rl-i {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: var(--surface2);
+  color: var(--brand-ink);
+  flex: none;
+}
+.rolec.rl[aria-checked="true"] .rl-i {
+  background: var(--brand);
+  color: var(--on-brand);
+}
+.rl-t {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+.rl-t b {
+  font-size: 14px;
+}
+.rl-p {
+  font-size: 13px;
+  color: var(--brand-ink);
+  font-weight: 600;
+}
+.rl-d {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.35;
+  white-space: normal;
+}
+.rl-ck {
+  color: var(--brand-ink);
+  flex: none;
+  align-self: center;
+}
+.rdesc {
+  display: none;
+}
+
+.rolegrp.rolelist {
+  grid-template-columns: 1fr !important;
+  display: grid !important;
+}
+.rolec.rl .rl-d {
+  font-weight: 400 !important;
+  color: var(--muted);
+}
+.rolec.rl .rl-t b {
+  font-weight: 700;
+  color: var(--text);
+}
+.rolec.rl .rl-p {
+  font-weight: 600;
+}

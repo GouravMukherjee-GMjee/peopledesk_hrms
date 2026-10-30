@@ -1,0 +1,94 @@
+/* ---------- checkboxes, one-line toolbars, one gutter ---------- */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  flex: none;
+  border: 1.5px solid color-mix(in srgb, var(--muted) 62%, var(--surface));
+  border-radius: 5px;
+  background: var(--surface);
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+  vertical-align: middle;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    box-shadow 0.12s ease;
+}
+input[type="checkbox"]:hover:not(:disabled) {
+  border-color: var(--brand);
+}
+input[type="checkbox"]:checked,
+input[type="checkbox"]:indeterminate {
+  background: var(--brand);
+  border-color: var(--brand);
+}
+input[type="checkbox"]:checked::after {
+  content: "";
+  width: 10px;
+  height: 5px;
+  border-left: 2px solid var(--on-brand);
+  border-bottom: 2px solid var(--on-brand);
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+input[type="checkbox"]:indeterminate::after {
+  content: "";
+  width: 9px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--on-brand);
+}
+input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+input[type="checkbox"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.selc,
+.colrow input {
+  width: 18px;
+  height: 18px;
+}
+@media (min-width: 901px) {
+  .content {
+    padding: 16px;
+    max-width: none;
+    margin: 0;
+  }
+  .top {
+    padding: 8px 16px;
+  }
+  .tools {
+    flex-wrap: nowrap;
+  }
+  .tools .sbox {
+    flex: 1 1 140px;
+    min-width: 120px;
+    max-width: 360px;
+  }
+  .tools .dd {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+  .tools .dd .dd-btn {
+    min-width: 0;
+  }
+  .tools .tabs {
+    flex: none;
+  }
+  .tools .grow {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .head {
+    flex-wrap: nowrap;
+  }
+  .head > div:first-child {
+    min-width: 0;
+  }
+}

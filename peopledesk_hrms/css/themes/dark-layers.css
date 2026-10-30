@@ -1,0 +1,24 @@
+/* =====================================================================
+   Dark theme layers: page < cards < raised, with a navy sidebar that is
+   clearly different from the page (same navy identity as light mode).
+   ===================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c1018;
+    --surface: #161c29;
+    --surface2: #1d2433;
+    --side: #172340;
+    --side-text: #b4c0da;
+    --hero: #243660;
+    --side-edge: rgba(255, 255, 255, 0.08);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c1018;
+  --surface: #161c29;
+  --surface2: #1d2433;
+  --side: #172340;
+  --side-text: #b4c0da;
+  --hero: #243660;
+  --side-edge: rgba(255, 255, 255, 0.08);
+}

@@ -1,0 +1,94 @@
+/* =====================================================================
+   Account modal: profile card, compact role switcher, grouped settings
+   ===================================================================== */
+.acct {
+  display: grid;
+  gap: 20px;
+}
+.acct-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 98px 16px 16px;
+  text-align: center;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--brand) 22%, var(--brand-soft)) 0,
+    var(--brand-soft) 58px,
+    var(--surface2) 58px
+  );
+}
+.acct-av {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+}
+.acct-av .avatar {
+  box-shadow:
+    0 0 0 4px var(--surface),
+    var(--shadow-md);
+}
+.acct-n {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+.acct-t {
+  color: var(--muted);
+  font-size: 13px;
+}
+.acct .chips2 {
+  justify-content: center;
+  margin: 8px 0 12px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.acct .sec-t {
+  margin: 0 2px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.acct .rolegrp.rolelist {
+  gap: 8px;
+}
+.acct .rolec.rl {
+  padding: 10px 12px;
+  border-radius: 12px;
+  gap: 12px;
+}
+.acct .rl-d {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 12px;
+}
+.acct .grp {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0 14px;
+  background: var(--surface);
+}
+.acct .grp .li {
+  padding: 12px 0;
+  gap: 12px;
+}
+.acct .li .ai {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+}
+.modal .mf .so-l {
+  margin-right: auto;
+}

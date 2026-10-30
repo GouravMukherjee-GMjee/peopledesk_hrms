@@ -1,0 +1,484 @@
+/* =====================================================================
+   Design system pass (final layer)
+   One scale for type, controls and elevation, and a dark theme that is
+   readable: solid blue actions with white text, clearer edges, calmer tints.
+   Type scale: 12 / 13 / 14 / 16 / 18 / 24 / 28 / 40. Nothing below 12px.
+   Controls: base 36 (44 on touch) · compact 32 · large 48. Radii: 10 / 12 / 99.
+   ===================================================================== */
+:root {
+  --btn-h-sm: 32px;
+  --tint-a: 82%;
+  --tint-b: 34%;
+  --side-edge: transparent;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --brand: #4270d6;
+    --on-brand: #fff;
+    --line: #343c52;
+    --line2: #4b566f;
+    --tint-a: 46%;
+    --tint-b: 16%;
+    --side-edge: rgba(255, 255, 255, 0.07);
+  }
+}
+:root[data-theme="dark"] {
+  --brand: #4270d6;
+  --on-brand: #fff;
+  --line: #343c52;
+  --line2: #4b566f;
+  --tint-a: 46%;
+  --tint-b: 16%;
+  --side-edge: rgba(255, 255, 255, 0.07);
+}
+.side {
+  border-right: 1px solid var(--side-edge);
+}
+.card[class*=" k-"] {
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--kt) var(--tint-a), var(--surface)) 0%,
+    color-mix(in srgb, var(--kt) var(--tint-b), var(--surface)) 100%
+  );
+}
+
+/* readable minimum size */
+.gl-t,
+kbd,
+.shift {
+  font-size: 12px;
+}
+
+/* notification badge: white on a red that passes contrast in both themes */
+.nbadge {
+  background: #c9423e;
+  color: #fff;
+}
+
+/* compact controls share one height everywhere (tables, cards, assistant) */
+.tw td .btn,
+.tw td .btn.sm,
+.apr .btn.sm,
+.ai-a .ai-row .btn.sm {
+  min-height: var(--btn-h-sm);
+}
+.btn.sm.ico,
+.tw td .btn.ico {
+  width: var(--btn-h-sm);
+  min-height: var(--btn-h-sm);
+}
+.ai-a li .btn.sm,
+.ai-a .ai-flag .btn.sm {
+  min-height: 28px;
+}
+@media (pointer: coarse) {
+  .tw td .btn,
+  .tw td .btn.sm,
+  .apr .btn.sm {
+    min-height: 40px;
+  }
+}
+
+/* the assistant launcher sits above the sticky footer instead of covering it */
+.ai-fab {
+  bottom: calc(52px + env(safe-area-inset-bottom, 0px));
+}
+@media (max-width: 900px) {
+  .ai-fab {
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* disabled primary stays legible */
+.btn:disabled {
+  opacity: 0.55;
+}
+
+/* dark theme details */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .btn.ok {
+    background: color-mix(in srgb, var(--green) 22%, var(--surface));
+    color: var(--green-ink);
+  }
+  :root:not([data-theme="light"]) .btn.bad {
+    background: color-mix(in srgb, var(--red) 22%, var(--surface));
+    color: var(--red-ink);
+  }
+  :root:not([data-theme="light"]) .btn.light {
+    color: #1d2535;
+  }
+}
+:root[data-theme="dark"] .btn.ok {
+  background: color-mix(in srgb, var(--green) 22%, var(--surface));
+  color: var(--green-ink);
+}
+:root[data-theme="dark"] .btn.bad {
+  background: color-mix(in srgb, var(--red) 22%, var(--surface));
+  color: var(--red-ink);
+}
+
+/* card title icon chip */
+.card .head h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.card .head h2 .cti {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  display: inline-grid;
+  place-items: center;
+  color: color-mix(in srgb, var(--h, var(--brand)) 80%, var(--text, #000));
+  background: color-mix(in srgb, var(--h, var(--brand)) 16%, var(--surface));
+}
+.card .head h2 .cti svg {
+  display: block;
+}
+.card .head .sub {
+  margin-left: 40px;
+}
+.card {
+  transition:
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+.card:hover {
+  box-shadow: 0 4px 14px rgb(16 24 40 / 8%);
+}
+
+/* compact KPI cards */
+.card.kpi {
+  padding: 12px 14px;
+}
+.card.kpi .kh {
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.card.kpi .ki {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+.card.kpi .ki svg {
+  width: 16px;
+  height: 16px;
+}
+.card.kpi .kl {
+  font-size: 13px;
+}
+.card.kpi .n {
+  font-size: 22px;
+  letter-spacing: -0.5px;
+}
+.card.kpi .n small {
+  font-size: 13px;
+}
+.card.kpi .kp .pill {
+  font-size: 12px;
+  padding: 2px 8px;
+}
+.card.kpi .kd {
+  margin-top: 3px;
+  font-size: 12px;
+}
+.card.kpi .kf {
+  padding-top: 8px;
+}
+.card.kpi .sp {
+  height: 36px;
+  margin: 0 -14px -12px;
+}
+.card.kpi .kbl {
+  margin-top: 4px;
+  font-size: 11px;
+}
+
+/* clickable links read as links */
+:root {
+  --link: #1a56db;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --link: #7fa8ff;
+  }
+}
+:root[data-theme="dark"] {
+  --link: #7fa8ff;
+}
+.link,
+.cname b {
+  color: var(--link);
+}
+.link {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--link) 40%, transparent);
+  text-underline-offset: 3px;
+}
+.link:hover,
+.cname:hover b {
+  color: color-mix(in srgb, var(--link) 80%, #000);
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+}
+:root[data-theme="dark"] .link:hover,
+:root[data-theme="dark"] .cname:hover b {
+  color: #a9c4ff;
+}
+.link:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* hyperlinks inside tables and everywhere else */
+tr.click td .person b,
+tr.click td:first-child > b,
+tr.click td:first-child .c0b > b,
+tr.click td:first-child .c0b > .person b,
+.li.cname b,
+.lk,
+.pgback,
+.backl,
+.crumbs button:not([aria-current]),
+.card a[href],
+.card a[href] b,
+.empty a[href],
+#view p a[href] {
+  color: var(--link);
+}
+tr.click td .person b,
+tr.click td:first-child > b,
+.pgback,
+.card a[href] {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--link) 35%, transparent);
+  text-underline-offset: 3px;
+}
+tr.click:hover td .person b,
+tr.click:hover td:first-child > b,
+.pgback:hover,
+.backl:hover,
+.crumbs button:hover,
+.card a[href]:hover {
+  color: color-mix(in srgb, var(--link) 80%, #000);
+  text-decoration-color: currentColor;
+}
+:root[data-theme="dark"] tr.click:hover td .person b,
+:root[data-theme="dark"] .pgback:hover,
+:root[data-theme="dark"] .backl:hover,
+:root[data-theme="dark"] .crumbs button:hover,
+:root[data-theme="dark"] .card a[href]:hover {
+  color: #a9c4ff;
+}
+
+/* links: underline only on hover */
+.link,
+tr.click td .person b,
+tr.click td:first-child > b,
+.pgback,
+.card a[href] {
+  text-decoration: none;
+}
+.link:hover,
+.cname:hover b,
+tr.click:hover td .person b,
+tr.click:hover td:first-child > b,
+tr.click:hover td:first-child .c0b > b,
+.pgback:hover,
+.backl:hover,
+.crumbs button:not([aria-current]):hover,
+.card a[href]:hover,
+.lk:hover {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 3px;
+}
+
+/* every clickable table row: the first data cell reads as a link, whatever its markup */
+tr.click td:first-child,
+tr.click td:first-child .c0b,
+tr.click td:first-child b,
+tr.click td:first-child .person b,
+tr.click td:first-child .c0b b {
+  color: var(--link);
+}
+tr.click td:first-child .muted,
+tr.click td:first-child .small,
+tr.click td:first-child .person span {
+  color: var(--muted);
+}
+tr.click:hover td:first-child,
+tr.click:hover td:first-child .c0b,
+tr.click:hover td:first-child b,
+tr.click:hover td:first-child .person b,
+tr.click:hover td:first-child .c0b b {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 3px;
+}
+tr.click:hover td:first-child .muted,
+tr.click:hover td:first-child .small,
+tr.click:hover td:first-child .person span,
+tr.click:hover td:first-child .chip,
+tr.click:hover td:first-child .btn {
+  text-decoration: none;
+}
+:root[data-theme="dark"] tr.click:hover td:first-child b,
+:root[data-theme="dark"] tr.click:hover td:first-child .person b {
+  color: #a9c4ff;
+}
+
+/* switch: the native checkbox behind it must never paint (off, hover, disabled or checked) */
+.sw input[type="checkbox"],
+.sw input[type="checkbox"]:checked,
+.sw input[type="checkbox"]:hover,
+.sw input[type="checkbox"]:disabled {
+  opacity: 0 !important;
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* tables: one line per cell; long text is trimmed with a tooltip instead of wrapping */
+.rt td,
+.rt th {
+  white-space: nowrap;
+}
+.rt td {
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+.rt td .person > div {
+  min-width: 0;
+}
+
+/* profile photo */
+.avatar.has-photo {
+  background: var(--surface2);
+  overflow: hidden;
+}
+.avatar.has-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.pf-avbtn {
+  position: relative;
+  border: 0;
+  background: none;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  flex: none;
+  line-height: 0;
+}
+.pf-avbtn .pf-cam {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--brand);
+  color: var(--on-brand);
+  border: 2px solid var(--surface);
+}
+.pf-avbtn:hover .pf-cam,
+.pf-avbtn:focus-visible .pf-cam {
+  background: var(--brand-ink);
+}
+.pf-avbtn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+.ph-up {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.ph-prev {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex: none;
+}
+.ph-prev img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ph-prev .avatar {
+  font-size: 56px !important;
+}
+.ph-side {
+  flex: 1 1 200px;
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+.ph-err {
+  color: var(--red-ink);
+  font-size: 13px;
+  min-height: 1em;
+}
+
+/* recruitment filter: plain toolbar, dropdown floats above the board */
+.rc-filter {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 12px;
+  position: relative;
+  z-index: 5;
+}
+.rc-filter .dd {
+  min-width: min(100%, 340px);
+}
+.rc-filter .dd {
+  max-width: none;
+  width: 240px;
+}
+.rc-filter {
+  gap: 8px;
+  justify-content: flex-start;
+}
+.rc-filter .dd {
+  width: auto;
+  min-width: 190px;
+  flex: 0 0 auto;
+}
+.rc-filter .dd .dd-btn {
+  width: 100%;
+}
+.rc-filter .chip,
+.rc-filter .link {
+  margin: 0;
+  flex: none;
+}
+.rc-filter .chip {
+  padding: 5px 12px;
+  font-size: 13px;
+}
+.rc-filter .chip.info {
+  background: color-mix(in srgb, var(--brand) 18%, var(--surface));
+  color: var(--brand-ink);
+  border: 1px solid color-mix(in srgb, var(--brand) 40%, transparent);
+}
+.rc-filter .chip.ok {
+  background: color-mix(in srgb, var(--green) 20%, var(--surface));
+  color: var(--green-ink);
+  border: 1px solid color-mix(in srgb, var(--green) 45%, transparent);
+}

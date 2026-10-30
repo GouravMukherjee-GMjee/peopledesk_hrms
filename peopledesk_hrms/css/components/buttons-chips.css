@@ -1,0 +1,118 @@
+/* buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line2);
+  background: var(--surface);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.btn:hover {
+  background: var(--surface2);
+}
+.btn.primary {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--on-brand);
+}
+.btn.primary:hover {
+  filter: brightness(1.08);
+}
+.btn.ok {
+  background: var(--green-soft);
+  border-color: transparent;
+  color: var(--green-ink);
+}
+.btn.bad {
+  background: var(--red-soft);
+  border-color: transparent;
+  color: var(--red-ink);
+}
+.btn.light {
+  background: #fff;
+  color: #202e4b;
+  border-color: #fff;
+}
+.btn.ghost {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.btn.sm {
+  min-height: 28px;
+  padding: 3px 11px;
+  font-size: 13px;
+}
+.btn.big {
+  min-height: 48px;
+  padding: 10px 26px;
+  font-size: 16px;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: none;
+}
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+.side :focus-visible,
+.hero :focus-visible {
+  outline-color: #fff;
+}
+/* chips */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+.chip::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.8;
+}
+.chip.nb::before {
+  display: none;
+}
+.chip.ok {
+  background: var(--green-soft);
+  color: var(--green-ink);
+}
+.chip.warn {
+  background: var(--amber-soft);
+  color: var(--amber-ink);
+}
+.chip.bad {
+  background: var(--red-soft);
+  color: var(--red-ink);
+}
+.chip.info {
+  background: var(--brand-soft);
+  color: var(--brand-ink);
+}
+.chip.mute {
+  background: var(--surface2);
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+.chip.glass {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}

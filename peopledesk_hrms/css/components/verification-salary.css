@@ -1,0 +1,111 @@
+/* ---------- verification strip, rest gaps, salary bar ---------- */
+.vstrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.vchip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 99px;
+  padding: 3px 10px 3px 8px;
+  font-size: 12px;
+  background: var(--surface2);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  max-width: 100%;
+}
+.vchip b {
+  font-weight: 600;
+  color: var(--text);
+}
+.vchip small {
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vchip.ok svg {
+  color: var(--green);
+}
+.vchip.warn {
+  background: var(--amber-soft);
+  border-color: transparent;
+}
+.vchip.warn svg {
+  color: var(--amber-ink);
+}
+.clockc.dark .vchip {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #c1cbe2;
+}
+.clockc.dark .vchip b {
+  color: #fff;
+}
+.clockc.dark .vchip small {
+  color: #c1cbe2;
+}
+.clockc.dark .vchip.ok svg {
+  color: #7ee0a9;
+}
+.clockc.dark .vchip.warn svg {
+  color: #f5c766;
+}
+@media (max-width: 520px) {
+  .vchip small {
+    display: none;
+  }
+}
+.rbar {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.rbar i {
+  display: block;
+  height: 100%;
+  background: var(--red);
+  border-radius: 99px;
+}
+.sbar {
+  display: flex;
+  gap: 2px;
+  height: 12px;
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 6px 0 10px;
+}
+.sbar i {
+  display: block;
+  min-width: 3px;
+}
+.sleg {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-size: 13px;
+}
+.sleg li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sleg li i {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  flex: none;
+}
+.sbar-w {
+  margin: 4px 0 12px;
+}

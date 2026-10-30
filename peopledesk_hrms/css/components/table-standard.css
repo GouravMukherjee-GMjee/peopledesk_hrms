@@ -1,0 +1,129 @@
+/* ---------- v39: compact KPI cards, one-line table header, standard soft table ---------- */
+.card.kpi .kh {
+  margin-bottom: 10px;
+}
+.card.kpi .ki {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+}
+.card.kpi .ki svg {
+  width: 18px;
+  height: 18px;
+}
+.card.kpi .kd {
+  margin-top: 4px;
+}
+.card.kpi .kf {
+  padding-top: 10px;
+}
+.card.kpi .sp {
+  height: 46px;
+}
+.nw {
+  white-space: nowrap;
+}
+@media (min-width: 901px) {
+  .tools .btn,
+  .tools .colw {
+    white-space: nowrap;
+  }
+  .tools .colw {
+    flex: none;
+  }
+}
+.tw {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.tw table {
+  width: 100%;
+}
+th {
+  background: color-mix(in srgb, var(--brand) 6%, var(--surface2));
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  padding: var(--thy, 9px) 12px;
+  border-bottom: 1px solid var(--line);
+  letter-spacing: 0.1px;
+}
+.tw table thead th {
+  background: color-mix(in srgb, var(--brand) 6%, var(--surface2));
+}
+.rt td {
+  border-bottom: 1px solid var(--line);
+}
+.rt tbody tr:last-child td {
+  border-bottom: 0;
+}
+.rt tbody tr.click:hover,
+.rt tbody tr:hover {
+  background: color-mix(in srgb, var(--brand) 4%, transparent);
+}
+@media (max-width: 1180px) {
+  .tools #ecount {
+    display: none;
+  }
+}
+@media (max-width: 900px) {
+  .tw {
+    border-radius: 10px;
+  }
+  .tools {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 520px) {
+  .card.kpi .ki {
+    width: 30px;
+    height: 30px;
+  }
+  .card.kpi .ki svg {
+    width: 16px;
+    height: 16px;
+  }
+  .card.kpi .sp {
+    height: 38px;
+  }
+}
+
+.tools .tabs .tab {
+  padding: 0 10px;
+}
+.tools .vsel .sel {
+  min-width: 0;
+  width: 100%;
+}
+.tools .dd {
+  max-width: 170px;
+}
+.sortl {
+  display: grid;
+  gap: 2px;
+  margin: 4px 0 8px;
+}
+.sortl button {
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--text);
+}
+.sortl button.on {
+  background: var(--brand-soft);
+  color: var(--brand-ink);
+  font-weight: 600;
+}
+.sortl button:hover {
+  background: var(--surface2);
+}
+.tw table thead th,
+.tw table thead th:first-child,
+th:first-child {
+  background: color-mix(in srgb, var(--brand) 6%, var(--surface2)) !important;
+}

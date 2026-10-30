@@ -1,0 +1,132 @@
+/* kpi */
+.kpi .ki {
+  flex: none;
+}
+.kpi .kt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 8px;
+  min-height: 30px;
+}
+.kpi .ki {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+}
+.kpi .kv {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+}
+.kpi .n {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+.kpi .n small {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.kpi .d {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 1px 7px;
+  border-radius: 99px;
+}
+.pill.up {
+  background: var(--green-soft);
+  color: var(--green-ink);
+}
+.pill.dn {
+  background: var(--red-soft);
+  color: var(--red-ink);
+}
+.pill.neu {
+  background: var(--surface2);
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+/* attention */
+.attn {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gap);
+}
+.att {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 11px var(--pad);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.att:hover {
+  border-color: var(--line2);
+  background: var(--surface2);
+}
+.att b {
+  display: block;
+  font-size: 14px;
+}
+.att small {
+  color: var(--muted);
+  font-size: 13px;
+}
+.ai {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.t-violet {
+  background: var(--violet-soft);
+  color: var(--violet-ink);
+}
+.t-brand {
+  background: var(--brand-soft);
+  color: var(--brand-ink);
+}
+.t-teal {
+  background: var(--teal-soft);
+  color: var(--teal-ink);
+}
+.t-amber {
+  background: var(--amber-soft);
+  color: var(--amber-ink);
+}
+.t-red {
+  background: var(--red-soft);
+  color: var(--red-ink);
+}
+.t-green {
+  background: var(--green-soft);
+  color: var(--green-ink);
+}

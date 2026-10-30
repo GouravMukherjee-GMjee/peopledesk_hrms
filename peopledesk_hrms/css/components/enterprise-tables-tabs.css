@@ -1,0 +1,156 @@
+/* =====================================================================
+   Enterprise tables, table cards and tabs (final layer)
+   ===================================================================== */
+:root {
+  --row-hover: color-mix(in srgb, var(--brand) 6%, var(--surface));
+  --th-bg: color-mix(in srgb, var(--brand) 7%, var(--surface2));
+}
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--brand);
+}
+
+/* --- tabs: segmented control, the selected tab is filled with the brand colour --- */
+.tabs {
+  background: color-mix(in srgb, var(--brand) 6%, var(--surface2));
+  border: 1px solid color-mix(in srgb, var(--brand) 14%, var(--line));
+  border-radius: 12px;
+  padding: 3px;
+  gap: 3px;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+.tab {
+  min-height: 32px;
+  padding: 4px 14px;
+  border-radius: 9px;
+  font-weight: 600;
+  color: var(--muted);
+  transition:
+    background 0.15s,
+    color 0.15s,
+    box-shadow 0.15s;
+}
+.tab:hover:not(.on) {
+  background: color-mix(in srgb, var(--brand) 10%, transparent);
+  color: var(--brand-ink);
+}
+.tab.on {
+  background: var(--brand);
+  color: var(--on-brand);
+  box-shadow:
+    0 1px 3px color-mix(in srgb, var(--brand) 45%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, #fff 12%, transparent);
+}
+.tab.on:hover {
+  color: var(--on-brand);
+}
+/* underline tabs (detail panels): brand text, thick brand indicator, soft hover */
+.ut {
+  gap: 4px;
+}
+.ut button {
+  padding: 9px 12px;
+  border-radius: 8px 8px 0 0;
+  border-bottom-width: 3px;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+.ut button:hover:not(.on) {
+  background: color-mix(in srgb, var(--brand) 8%, transparent);
+  color: var(--brand-ink);
+}
+.ut button.on {
+  color: var(--brand-ink);
+  background: color-mix(in srgb, var(--brand) 8%, transparent);
+  border-color: var(--brand);
+}
+
+/* --- tables --- */
+.tw {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+}
+.tw table thead th,
+.tw table thead th:first-child,
+th:first-child,
+th {
+  background: var(--th-bg) !important;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--thy, 11px) 14px;
+  border-bottom: 1px solid color-mix(in srgb, var(--brand) 14%, var(--line));
+}
+th[aria-sort="ascending"],
+th[aria-sort="descending"] {
+  color: var(--brand-ink);
+}
+td {
+  padding: var(--ty, 11px) 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.tw table tbody tr {
+  transition: background 0.12s;
+}
+.tw table tbody tr:hover td,
+.tw table tbody tr:hover td:first-child {
+  background: var(--row-hover);
+}
+.tw table tbody tr.click:hover td:first-child {
+  box-shadow:
+    inset 3px 0 0 var(--brand),
+    1px 0 0 var(--line);
+}
+.tw table tbody tr.today td,
+.tw table tbody tr.today td:first-child {
+  background: var(--brand-soft);
+}
+.tw table tr:has(input[type="checkbox"]:checked) td,
+.tw table tr:has(input[type="checkbox"]:checked) td:first-child {
+  background: color-mix(in srgb, var(--brand) 10%, var(--surface));
+}
+.tot td {
+  background: var(--surface2);
+  border-top: 2px solid var(--line2);
+}
+.tw td .btn {
+  min-height: 30px;
+  padding: 3px 12px;
+  font-size: 13px;
+}
+.tw td .chip {
+  font-size: 12px;
+}
+.tw td.num,
+.tw th.num {
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 520px) {
+  th,
+  .tw table thead th {
+    padding: 9px 10px;
+  }
+  td {
+    padding: 9px 10px;
+  }
+}
+
+/* sortable header buttons look exactly like plain headers */
+th .thb {
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+.card > .tools {
+  margin-bottom: 14px;
+}

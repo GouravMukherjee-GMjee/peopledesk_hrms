@@ -1,0 +1,94 @@
+/* ---------- one button system, centred icon chips, one-line checkbox cells, scrolling tables ---------- */
+:root {
+  --btn-h: 36px;
+}
+@media (max-width: 900px) {
+  :root {
+    --btn-h: 40px;
+  }
+}
+@media (max-width: 520px) {
+  :root {
+    --btn-h: 44px;
+  }
+}
+.btn,
+.btn.sm {
+  min-height: var(--btn-h);
+  padding: 0 14px;
+  font-size: 14px;
+  gap: 8px;
+}
+.btn.big {
+  min-height: 48px;
+  padding: 0 26px;
+  font-size: 16px;
+}
+.btn svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+.btn.big svg {
+  width: 18px;
+  height: 18px;
+}
+.btn.ico {
+  width: var(--btn-h);
+  padding: 0;
+  justify-content: center;
+}
+.icon-btn {
+  width: var(--btn-h);
+  height: var(--btn-h);
+}
+.person .ai {
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.c0 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.c0b {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.selw {
+  margin: 0;
+  flex: none;
+}
+.tw {
+  overflow: auto;
+}
+.tw table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  box-shadow: 0 1px 0 var(--line);
+}
+.tw table thead th:first-child {
+  z-index: 5;
+}
+.modal .tw {
+  max-height: min(420px, 60vh);
+}
+@media (max-width: 520px) {
+  .selbar {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 12px;
+    width: calc(100vw - 24px);
+  }
+  .selbar b {
+    flex: 1 1 100%;
+    margin: 0;
+  }
+  .selbar .btn {
+    flex: 1 1 0;
+    padding: 0 8px;
+  }
+}

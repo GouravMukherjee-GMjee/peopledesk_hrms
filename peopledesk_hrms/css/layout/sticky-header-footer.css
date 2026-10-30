@@ -1,0 +1,127 @@
+/* ---------- v40: sticky breadcrumb, top-right home button, single-line navigation ---------- */
+.crumbbar {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + var(--dbh) + var(--tbh, 56px));
+  z-index: 25;
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  padding: 0 16px;
+}
+.crumbbar:empty {
+  display: none;
+}
+.crumbbar .crumbs {
+  margin: 0;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .crumbbar {
+    display: none;
+  }
+}
+html {
+  scroll-padding-top: calc(var(--dbh) + var(--tbh, 56px) + 56px);
+}
+.hometop {
+  justify-content: flex-end;
+}
+.nav-btn .nl,
+.gl-t,
+.rolechip span,
+.viewas,
+.cmd .ct {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav-btn {
+  min-width: 0;
+}
+
+/* ---------- v41: header block and footer stay put ---------- */
+.stickyhead {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 40;
+}
+.stickyhead .demobar,
+.stickyhead .top,
+.stickyhead .crumbbar {
+  position: static !important;
+  top: auto !important;
+}
+html {
+  scroll-padding-top: calc(var(--shh, 90px) + 16px);
+}
+@media (min-width: 901px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+  }
+  .main > .content {
+    flex: 1 0 auto;
+  }
+  .foot {
+    position: sticky;
+    bottom: 0;
+    z-index: 30;
+    flex-wrap: nowrap;
+    align-items: center;
+    min-height: 36px;
+    padding: 8px 16px;
+    margin: 0;
+    background: color-mix(in srgb, var(--surface) 96%, transparent);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  .selbar {
+    bottom: 56px;
+  }
+  #toasts {
+    bottom: 56px;
+  }
+}
+@media (max-width: 900px) {
+  .foot {
+    padding: 10px 12px 8px;
+    margin-top: 8px;
+  }
+}
+
+.colpop {
+  z-index: 35;
+}
+@media (min-width: 901px) {
+  .colpop {
+    max-height: calc(100dvh - var(--shh, 90px) - 70px);
+    overflow: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .top .cmd {
+    min-width: 0;
+    flex: 1 1 0;
+  }
+  .rolechip {
+    min-width: 0;
+    max-width: 128px;
+    flex: 0 1 auto;
+  }
+  .rolechip span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 360px) {
+  .rolechip {
+    max-width: 104px;
+  }
+}

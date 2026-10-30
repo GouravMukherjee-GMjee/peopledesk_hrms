@@ -1,0 +1,29 @@
+/* =====================================================================
+   Destructive icons: every cross (close, remove, reject) and trash (delete, clear)
+   icon is red, and its button gets a red tint on hover and keyboard focus.
+   Matched by icon shape, so any button that uses these icons follows automatically.
+   ===================================================================== */
+button:has(svg path[d^="M18 6L6 18"]):not(.primary):not(.tab):not(.ai-opt),
+button:has(svg path[d^="M3 6h18"]):not(.primary):not(.tab) {
+  color: var(--red-ink) !important;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+}
+button:has(svg path[d^="M18 6L6 18"]):not(.primary):not(.tab):not(.ai-opt):is(
+    :hover,
+    :focus-visible
+  ),
+button:has(svg path[d^="M3 6h18"]):not(.primary):not(.tab):is(:hover, :focus-visible) {
+  background: var(--red-soft) !important;
+  color: var(--red-ink) !important;
+  border-color: color-mix(in srgb, var(--red) 45%, var(--line2)) !important;
+}
+button:has(svg path[d^="M18 6L6 18"]):focus-visible,
+button:has(svg path[d^="M3 6h18"]):focus-visible {
+  outline-color: var(--red);
+}
+.btn.bad:hover {
+  background: color-mix(in srgb, var(--red) 24%, var(--surface));
+}

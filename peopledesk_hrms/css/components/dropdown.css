@@ -1,0 +1,190 @@
+/* ---------- themed dropdown ---------- */
+.dd {
+  position: relative;
+  display: inline-block;
+  min-width: 0;
+  vertical-align: middle;
+}
+.field .dd,
+.fg .dd {
+  display: block;
+  width: 100%;
+}
+.dd-native {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+.dd-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 36px;
+  padding: 0 12px 0 14px;
+  border: 1px solid var(--line2);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  font-weight: 500;
+}
+.dd-btn:hover {
+  border-color: var(--brand);
+}
+.dd-btn .dd-t {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dd-btn svg {
+  color: var(--muted);
+  transition: transform 0.15s;
+}
+.dd-btn[aria-expanded="true"] {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 1px var(--brand);
+}
+.dd-btn[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+.dd-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.dd-s .dd-btn {
+  min-height: 36px;
+  padding: 0 10px 0 14px;
+  width: auto;
+  min-width: 140px;
+}
+.viewas .dd-btn {
+  border: 0;
+  background: transparent;
+  font-weight: 600;
+  min-height: 36px;
+  min-width: 0;
+  padding: 0 8px 0 4px;
+  box-shadow: none;
+}
+.ck-r .dd-btn {
+  min-height: 48px;
+}
+.dark .dd-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+.dark .dd-btn svg {
+  color: #c1cbe2;
+}
+.dd-pop {
+  position: fixed;
+  z-index: 85;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow2);
+  padding: 6px;
+  animation: pop 0.12s ease-out;
+}
+.dd-list {
+  outline: none;
+  overflow: auto;
+  max-height: min(300px, 60dvh);
+  overscroll-behavior: contain;
+}
+.dd-o {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 9px 12px;
+  margin: 1px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--text);
+}
+.dd-o.act {
+  background: var(--surface2);
+}
+.dd-o:hover {
+  background: var(--surface2);
+}
+.dd-o.sel {
+  background: var(--brand-soft);
+  color: var(--brand-ink);
+  font-weight: 600;
+}
+.dd-o.dis {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.dd-ck {
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  color: var(--brand-ink);
+}
+.dd-o.sel .dd-ck {
+  opacity: 1;
+}
+.dd-sheet-ov {
+  position: fixed;
+  inset: 0;
+  z-index: 85;
+  background: rgba(8, 16, 36, 0.55);
+  display: flex;
+  align-items: flex-end;
+  animation: fade 0.15s ease-out;
+}
+.dd-sheet {
+  position: relative;
+  width: 100%;
+  background: var(--surface);
+  border-radius: 20px 20px 0 0;
+  max-height: 74dvh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  animation: pop 0.2s ease-out;
+}
+.dd-sheet .grab {
+  display: block;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42px;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--line2);
+}
+.dd-sh {
+  padding: 24px 22px 8px;
+  font-weight: 700;
+  font-size: 16px;
+}
+.dd-sheet .dd-list {
+  max-height: none;
+  padding: 4px 12px 14px;
+}
+.dd-sheet .dd-o {
+  min-height: 52px;
+  padding: 0 14px;
+  font-size: 16px;
+  border-radius: 12px;
+  white-space: normal;
+}
+.grab {
+  display: none;
+}

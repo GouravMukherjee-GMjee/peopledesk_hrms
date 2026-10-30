@@ -1,0 +1,176 @@
+/* ---------- login v2: illustration, caps lock, status ---------- */
+.mlab {
+  display: none;
+}
+.cname {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: none;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  min-width: 0;
+  width: 100%;
+  font: inherit;
+}
+.cname .cn {
+  min-width: 0;
+  flex: 1;
+}
+.cname b {
+  display: block;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cname .cn > span {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rolechip {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 10px 0 13px;
+  border: 1px solid transparent;
+  border-radius: 99px;
+  background: var(--brand-soft);
+  color: var(--brand-ink);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.rolegrp {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 4px;
+}
+.rolec {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  min-width: 0;
+  white-space: nowrap;
+}
+.rolec svg {
+  flex: none;
+}
+.rolec:hover {
+  color: var(--text);
+}
+.rolec[aria-checked="true"] {
+  background: var(--surface);
+  color: var(--brand-ink);
+  box-shadow: 0 1px 3px rgba(16, 32, 64, 0.2);
+}
+.rdesc {
+  margin: 9px 2px 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.acct-head {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin: 0 0 16px;
+}
+.acct-head b {
+  display: block;
+  font-size: 18px;
+  letter-spacing: -0.2px;
+}
+.acct-head > div > span {
+  display: block;
+  color: var(--muted);
+}
+.sec {
+  margin-bottom: 16px;
+}
+.sec:last-child {
+  margin-bottom: 0;
+}
+.sec-t {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 9px;
+}
+.grp {
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 2px 16px;
+}
+.grp .li,
+.grp .li:first-child,
+.grp .li:last-child {
+  padding: 13px 0;
+}
+.caps {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--amber-ink);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+.caps[hidden] {
+  display: none;
+}
+.lg-card.shake {
+  animation: shake 0.4s;
+}
+@keyframes shake {
+  20% {
+    transform: translateX(-7px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+.stt {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.stt i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 3px var(--green-soft);
+}

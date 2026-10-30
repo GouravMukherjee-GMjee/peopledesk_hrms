@@ -1,0 +1,126 @@
+/* ---------- security steps ---------- */
+.backl {
+  border: 0;
+  background: none;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--muted);
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0 0 18px;
+  padding: 4px 0;
+}
+.backl:hover {
+  color: var(--text);
+}
+.backl svg {
+  transform: rotate(180deg);
+}
+.stepic {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+}
+.otp {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 22px;
+}
+.otp input {
+  width: 100%;
+  min-width: 0;
+  height: 58px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  border: 1px solid var(--line2);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0;
+  font-variant-numeric: tabular-nums;
+}
+.otp input:focus {
+  outline: 2px solid var(--brand);
+  border-color: var(--brand);
+}
+.otp input.filled {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+}
+.otp.bad input {
+  border-color: var(--red);
+  background: var(--red-soft);
+}
+.otp input:disabled {
+  opacity: 0.5;
+}
+.meter {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin: -2px 0 10px;
+}
+.meter i {
+  flex: 1;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--line);
+}
+.meter span {
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 96px;
+  text-align: right;
+  color: var(--muted);
+}
+.meter[data-l="1"] i:nth-child(-n + 1) {
+  background: var(--red);
+}
+.meter[data-l="2"] i:nth-child(-n + 2) {
+  background: var(--amber);
+}
+.meter[data-l="3"] i:nth-child(-n + 3) {
+  background: var(--teal);
+}
+.meter[data-l="4"] i {
+  background: var(--green);
+}
+.rules {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.rules li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.rk {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line2);
+  display: grid;
+  place-items: center;
+  color: transparent;
+  flex: none;
+}
+.rules li.ok {
+  color: var(--green-ink);
+}
+.rules li.ok .rk {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
