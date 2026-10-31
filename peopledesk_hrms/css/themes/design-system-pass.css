@@ -127,7 +127,7 @@ kbd,
   flex: none;
   width: 30px;
   height: 30px;
-  border-radius: 9px;
+  border-radius: 10px;
   display: inline-grid;
   place-items: center;
   color: color-mix(in srgb, var(--h, var(--brand)) 80%, var(--text, #000));
@@ -481,4 +481,583 @@ tr.click:hover td:first-child .btn {
   background: color-mix(in srgb, var(--green) 20%, var(--surface));
   color: var(--green-ink);
   border: 1px solid color-mix(in srgb, var(--green) 45%, transparent);
+}
+
+/* tighter title / subtitle spacing */
+.ph h1 {
+  line-height: 1.2;
+}
+.ph p {
+  line-height: 1.35;
+  margin-top: 2px;
+}
+.card h2 {
+  line-height: 1.25;
+}
+.card .sub {
+  line-height: 1.35;
+  margin-top: 0;
+}
+.card .head h2 .cti {
+  width: 28px;
+  height: 28px;
+}
+.card .head h2 + .sub,
+.card .head h2 + p.sub {
+  margin-top: -2px;
+}
+.card .head .sub {
+  margin-left: 38px;
+}
+
+/* card hyperlinks get a trailing arrow (unless they already carry an icon) */
+.card .head .link:not(:has(svg))::after,
+.card .apr-foot .link:not(:has(svg))::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  flex: none;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  transition: transform 0.15s ease;
+}
+.card .head .link:hover::after,
+.card .apr-foot .link:hover::after {
+  transform: translateX(2px);
+}
+.card .head .link:hover,
+.card .apr-foot .link:hover {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 3px;
+}
+
+/* compact table rows, headers and avatars */
+html:not([data-density]) table th {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  line-height: 1.3;
+}
+html:not([data-density]) table td {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  line-height: 1.35;
+}
+table .avatar {
+  width: 28px !important;
+  height: 28px !important;
+  font-size: 11px !important;
+}
+
+/* table cells stay on one line; the table scrolls sideways instead of wrapping */
+.tw table td,
+.tw table th {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.tw table td > div,
+.tw table td > span,
+.tw table td .chip,
+.tw table td b,
+.tw table td .small,
+.tw table td .muted {
+  white-space: nowrap;
+}
+.tw table {
+  width: 100%;
+  min-width: max-content;
+}
+/* free-text columns (reasons, notes) opt in to wrapping with a sensible width */
+.tw table td.wrap,
+.tw table td.wrap * {
+  white-space: normal;
+  min-width: 200px;
+  max-width: 360px;
+}
+.tw table td:has(> .avatar, > div > .avatar) {
+  min-width: 180px;
+}
+.tw table td .btn,
+.tw table td .chip {
+  flex: none;
+}
+
+/* toolbar: one control height and one type size across search, dropdowns, tabs and buttons */
+.tools {
+  --tool-h: 34px;
+  gap: 8px;
+  align-items: center;
+}
+.tools .sbox,
+.tools .dd-btn,
+.tools select.sel,
+.tools .btn,
+.tools .btn.sm,
+.tools .colw > .btn {
+  min-height: var(--tool-h);
+  height: var(--tool-h);
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 13px;
+  border-radius: 10px;
+}
+.tools .sbox {
+  padding: 0 10px;
+  gap: 6px;
+}
+.tools .sbox input {
+  min-height: 0;
+  height: 100%;
+  font-size: 13px;
+}
+.tools .sbox svg {
+  width: 15px;
+  height: 15px;
+}
+.tools .dd-btn {
+  padding: 0 10px 0 12px;
+  font-weight: 500;
+}
+.tools .btn svg,
+.tools .dd-btn svg {
+  width: 15px;
+  height: 15px;
+}
+.tools .tabs {
+  padding: 2px;
+  gap: 2px;
+  border-radius: 10px;
+  height: var(--tool-h);
+  align-items: stretch;
+}
+.tools .tab {
+  min-height: 0;
+  padding: 0 12px;
+  font-size: 13px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+}
+.tools .tabs .tab svg {
+  width: 15px;
+  height: 15px;
+}
+.tools #ecount {
+  font-size: 13px;
+}
+
+/* applied filter chips and their actions */
+.fchips {
+  gap: 6px;
+  margin: 0 0 10px;
+}
+.fchips .chip.fc {
+  height: 26px;
+  padding: 0 4px 0 10px;
+  font-size: 13px;
+}
+.fchips .chip.fc button {
+  width: 18px;
+  height: 18px;
+}
+.fchips .link {
+  font-size: 13px;
+  font-weight: 600;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 8px;
+}
+.fchips .link:hover {
+  background: var(--brand-soft);
+  text-decoration: none;
+}
+
+/* no second line for table data, chips, buttons or list rows, at any screen width */
+table td,
+table th,
+table td *,
+.rt.aw.keep td:first-child .person b,
+.tools .btn,
+.chip,
+.btn,
+.li > b,
+.li .chip {
+  white-space: nowrap;
+}
+table td.wrap,
+table td.wrap * {
+  white-space: normal;
+}
+.li .grow,
+.person > div {
+  min-width: 0;
+}
+.li .grow > .small,
+.li .grow > b,
+.person b,
+.person .muted {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* applied filters sit inline in the toolbar, on the same line as the other controls */
+.fchips[hidden] {
+  display: none;
+}
+.tools .fchips {
+  margin: 0;
+  flex-wrap: nowrap;
+  flex: none;
+}
+.tools .fchips .link {
+  white-space: nowrap;
+  padding: 0 6px;
+}
+
+/* Display control: icon only */
+.tools .colw > .btn .lbl {
+  display: none;
+}
+.tools .colw > .btn {
+  width: var(--tool-h);
+  padding: 0;
+  gap: 0;
+}
+
+/* one height for every single-line field: text, number, date, time, select, dropdown, search */
+:root {
+  --ctl-h: 38px;
+}
+@media (max-width: 900px) {
+  :root {
+    --ctl-h: 40px;
+  }
+}
+.field input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),
+.field select,
+.field .dd-btn,
+select.sel,
+.dd-btn,
+.sbox,
+.modal input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),
+.modal select,
+.card input[type="date"],
+.card input[type="time"],
+.card input[type="number"],
+.card input[type="text"],
+.card input[type="email"],
+.card input[type="tel"],
+.card input[type="password"],
+.card select:not(.sel) {
+  height: var(--ctl-h);
+  min-height: var(--ctl-h);
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 14px;
+  line-height: 1.2;
+  box-sizing: border-box;
+}
+.sbox input {
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+}
+.dd-btn {
+  padding-left: 12px;
+  padding-right: 10px;
+}
+.field textarea {
+  min-height: calc(var(--ctl-h) * 2);
+  padding-top: 9px;
+  padding-bottom: 9px;
+  line-height: 1.4;
+}
+.field input[type="date"],
+.field input[type="time"] {
+  padding-left: 12px;
+  padding-right: 8px;
+}
+/* toolbar controls keep their own compact height */
+.tools .sbox,
+.tools .dd-btn,
+.tools select.sel {
+  height: var(--tool-h);
+  min-height: var(--tool-h);
+}
+
+/* profile hero: name, key facts and icon actions on one row */
+.prof-hero .pf-top {
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+.prof-hero .pf-top .ph-main {
+  flex: 0 1 auto;
+  min-width: 200px;
+}
+.prof-hero .ph-facts {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-top: 0;
+  min-width: 0;
+}
+.prof-hero .pfact {
+  padding: 2px 22px;
+  border-left: 1px solid var(--line);
+  white-space: nowrap;
+}
+.prof-hero .pfact b {
+  font-size: 14px;
+}
+.prof-hero .ph-acts {
+  flex: none;
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+.ph-acts .btn.ibtn {
+  width: 36px;
+  min-height: 36px;
+  height: 36px;
+  padding: 0;
+  gap: 0;
+}
+@media (max-width: 1100px) {
+  .prof-hero .pf-top {
+    flex-wrap: wrap;
+  }
+  .prof-hero .ph-main {
+    flex: 1 1 240px;
+  }
+  .prof-hero .ph-facts {
+    order: 3;
+    flex: 1 1 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .prof-hero .pfact:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+@media (max-width: 520px) {
+  .ph-acts .btn.ibtn {
+    flex: none;
+  }
+  .prof-hero .ph-acts {
+    width: auto;
+  }
+}
+
+/* tooltip for icon-only controls */
+.ic-tip {
+  position: fixed;
+  z-index: 3000;
+  max-width: 240px;
+  padding: 5px 9px;
+  border-radius: 8px;
+  background: #1d2535;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-2px);
+  transition:
+    opacity 0.12s ease,
+    transform 0.12s ease;
+  box-shadow: 0 4px 12px rgba(16, 32, 64, 0.25);
+}
+.ic-tip.on {
+  opacity: 1;
+  transform: none;
+}
+@media (hover: none) {
+  .ic-tip {
+    display: none;
+  }
+}
+
+/* clock card: work mode dropdown and the clock in/out button share one height and baseline */
+.ck-r {
+  align-items: flex-end;
+}
+.ck-r .field .dd-btn,
+.ck-r .field select,
+.ck-r > .btn.big {
+  height: 46px;
+  min-height: 46px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.ck-r > .btn.big {
+  padding: 0 28px;
+  align-self: flex-end;
+}
+.ck-r .field {
+  margin: 0;
+}
+
+/* weekly attendance card: the table fills the card, rows share the height, the hours bar sits at the bottom */
+.card:has(> .wkfoot) {
+  display: flex;
+  flex-direction: column;
+}
+.card:has(> .wkfoot) > .tw {
+  flex: 0 0 auto;
+  max-height: none !important;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+.card:has(> .wkfoot) > .tw table {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+.card:has(> .wkfoot) > .tw table tbody tr {
+  height: 52px;
+}
+.card:has(> .wkfoot) > .tw table td {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.card:has(> .wkfoot) .wkfoot {
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+/* weekly table + month calendar: calendar is narrower, so it is shorter and the table rows stay moderate */
+.dashboard-view > .row.c21.wkrow {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 400px);
+}
+.card:has(> .wkfoot) > .tw table tbody tr {
+  height: 46px;
+}
+.card:has(> .wkfoot) > .tw table td {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.mcard .mcal {
+  gap: 5px;
+}
+@media (max-width: 900px) {
+  .dashboard-view > .row.c21.wkrow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* one row height for every data table (desktop); density setting still scales it */
+:root {
+  --row-h: 48px;
+  --head-h: 40px;
+}
+html[data-density="compact"] {
+  --row-h: 40px;
+  --head-h: 34px;
+}
+html[data-density="comfortable"] {
+  --row-h: 56px;
+  --head-h: 44px;
+}
+@media (min-width: 901px) {
+  html .tw table:not(.rost) tbody tr > td {
+    height: var(--row-h);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    line-height: 1.35;
+    vertical-align: middle;
+    box-sizing: border-box;
+  }
+  html .tw table:not(.rost) thead tr > th {
+    height: var(--head-h);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    vertical-align: middle;
+    box-sizing: border-box;
+  }
+  .tw table:not(.rost) td .btn,
+  .tw table:not(.rost) td .btn.sm {
+    min-height: 30px;
+    height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .tw table:not(.rost) td .chip {
+    min-height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: inline-flex;
+    align-items: center;
+  }
+  .tw table:not(.rost) td .avatar {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .tw table:not(.rost) td input[type="checkbox"] {
+    margin: 0;
+  }
+  /* empty-state and total rows follow the same rhythm */
+  .tw table tbody tr.tot > td {
+    height: var(--row-h);
+  }
+}
+
+/* settings cards: title and description on the left, the on/off switch pinned to the right edge */
+.stc-h {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.stc-h > .grow {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.stc-h > .sw {
+  flex: none;
+  margin-left: auto;
+  margin-top: 2px;
+}
+.stc {
+  padding: 14px 16px;
+}
+.stc-b {
+  margin-top: 12px;
+}
+.stc-b .field:last-child {
+  margin-bottom: 0;
+}
+
+/* dialog and drawer footers: every action sits on the right, the main action last */
+.modal .mf,
+.ov.drawer .modal .mf {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+.modal .mf > * {
+  margin-left: 0;
+  margin-right: 0;
+}
+.modal .mf .so-l {
+  margin-right: 0;
+}
+.modal .mf .btn.primary,
+.modal .mf .btn.bad {
+  order: 2;
+}
+.modal .mf .btn:not(.primary):not(.bad) {
+  order: 1;
 }

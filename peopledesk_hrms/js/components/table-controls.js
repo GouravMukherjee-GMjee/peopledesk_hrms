@@ -95,7 +95,7 @@ function resetCols() {
 }
 const colsCtl = () => {
   const d = document.documentElement.dataset.density || 'normal';
-  return `<span class="colw desk"><button class="btn sm" aria-haspopup="true" aria-label="Display options" aria-expanded="${!!S.colMenu}" onclick="S.colMenu=!S.colMenu;render()">${ic('sliders', 14)}<span class="lbl">Display</span></button>${
+  return `<span class="colw desk"><button class="btn sm" aria-haspopup="true" aria-label="Display options" title="Display options" aria-expanded="${!!S.colMenu}" onclick="S.colMenu=!S.colMenu;render()">${ic('sliders', 14)}<span class="lbl">Display</span></button>${
     S.colMenu
       ? `<div class="colpop" role="group" aria-label="Display options">${
           S.page === 'employees'

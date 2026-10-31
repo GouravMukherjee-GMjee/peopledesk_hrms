@@ -27,7 +27,7 @@
 .hx-seg button {
   padding: 7px 16px;
   border: 0;
-  border-radius: 7px;
+  border-radius: 8px;
   background: transparent;
   color: var(--muted);
   font: inherit;
@@ -96,7 +96,7 @@
 .hx-cs {
   margin-top: 4px;
   color: var(--muted);
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 1.35;
 }
 .hx-cd.up {
@@ -244,7 +244,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px 14px;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 .hx-leg span {
@@ -340,7 +340,7 @@
   opacity: 0.55;
 }
 .hx-val {
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -396,7 +396,7 @@
 }
 .hx-tg {
   min-height: 16px;
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--muted);
   text-align: center;
   line-height: 1.2;
@@ -527,7 +527,7 @@ button.hx-hc:focus-visible {
   background: var(--amber-soft);
   color: var(--amber-ink);
   font: inherit;
-  font-size: 12.5px;
+  font-size: 13px;
   cursor: pointer;
 }
 /* empty, error, loading */
@@ -652,7 +652,7 @@ button.hx-hc:focus-visible {
 }
 .hx-cmp span {
   display: block;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 .hx-cmp b {
@@ -811,7 +811,7 @@ button.hx-hc:focus-visible {
 }
 .hx-ck .person span span {
   display: block;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 /* requests */
@@ -919,7 +919,7 @@ button.hx-hc:focus-visible {
 }
 .hx-ls span {
   display: block;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 .hx-ls .r {
@@ -969,7 +969,7 @@ button.hx-hc:focus-visible {
   min-width: 0;
 }
 .hx-pick .g span {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 .hx-pick .h {
@@ -1036,7 +1036,7 @@ button.hx-hc:focus-visible {
   font-size: 15px;
 }
 .hx-opt .oh span {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 .hx-opt .hv {
@@ -1143,7 +1143,7 @@ button.hx-hc:focus-visible {
   border-radius: 10px;
   background: var(--brand-soft);
   color: var(--brand-ink);
-  font-size: 13.5px;
+  font-size: 14px;
 }
 .opx-note svg {
   flex: none;
@@ -1265,4 +1265,170 @@ button.hx-hc:focus-visible {
 .hx td.num,
 .hx td:nth-child(3) {
   white-space: nowrap;
+}
+
+/* ---- layout polish: tighter cards, tidier "Hours per day" chart ---- */
+.hx-body {
+  padding-top: 12px;
+}
+.hx-top {
+  margin-bottom: 12px;
+}
+.hx-cards {
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.hx-cd {
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+.hx-cl {
+  font-size: 13px;
+}
+.hx-cv {
+  margin-top: 2px;
+  font-size: 24px;
+  line-height: 1.15;
+}
+.hx-cs {
+  margin-top: 2px;
+  font-size: 12px;
+}
+.hx-panel {
+  padding: 14px;
+  border-radius: 10px;
+}
+.hx-facts {
+  gap: 10px 20px;
+  margin-bottom: 12px;
+}
+.hx-f dd {
+  font-size: 18px;
+}
+.hx-acts {
+  margin-top: 10px;
+}
+
+/* chart header: title left, legend as small inline items */
+.hx-ch {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.hx-leg {
+  gap: 4px 14px;
+  font-size: 12px;
+}
+.hx-leg .k {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+.k.offw,
+.hx-offw {
+  border-width: 1.5px;
+}
+.k.exp {
+  width: 14px !important;
+}
+
+/* day columns: even tiles, one plot height, slim rounded bars */
+.hx-cols {
+  gap: 6px;
+}
+.hx-col {
+  gap: 4px;
+  padding: 8px 4px 6px;
+  border-color: var(--line);
+  background: var(--surface);
+  border-radius: 10px;
+}
+.hx-col.today {
+  background: var(--brand-soft);
+  border-color: var(--brand);
+}
+.hx-val {
+  font-size: 12px;
+  color: var(--text);
+}
+.hx-plot {
+  height: 120px;
+  background-color: var(--surface2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.hx-stack {
+  width: 56%;
+  max-width: 34px;
+}
+.hx-stack i:first-child {
+  border-radius: 6px 6px 0 0;
+}
+.hx-dn {
+  flex-direction: row;
+  gap: 4px;
+  font-size: 13px;
+}
+.hx-tg {
+  min-height: 14px;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.hx-tot {
+  margin: 12px 0 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--surface2);
+  font-size: 13px;
+}
+.hx-alt {
+  margin-top: 10px;
+}
+@media (max-width: 520px) {
+  .hx-plot {
+    height: 100px;
+  }
+  .hx-col {
+    padding: 6px 1px 4px;
+  }
+  .hx-dn {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* tabs and period bar: smaller gaps and controls */
+.hx-body {
+  padding-top: 8px;
+}
+.hx-top {
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.hx-seg {
+  padding: 2px;
+  border-radius: 10px;
+}
+.hx-seg button {
+  padding: 0 14px;
+  height: 30px;
+  font-size: 13px;
+  border-radius: 8px;
+}
+.hx-pn {
+  gap: 4px;
+  min-width: 0;
+}
+.hx-pn .icon-btn {
+  width: 32px;
+  height: 32px;
+}
+.hx-pl {
+  font-size: 13px;
+}
+.card.hx > .head {
+  margin-bottom: 0;
 }

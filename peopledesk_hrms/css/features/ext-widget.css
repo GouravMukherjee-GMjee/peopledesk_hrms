@@ -115,7 +115,7 @@
   border-radius: 10px;
   background: var(--teal-soft);
   color: var(--teal-ink);
-  font-size: 13.5px;
+  font-size: 14px;
 }
 .xa-priv svg {
   flex: none;
@@ -304,7 +304,7 @@
   border-radius: 8px;
   background: var(--text);
   color: var(--surface);
-  font-size: 12.5px;
+  font-size: 13px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -493,7 +493,7 @@
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--surface);
-  font-size: 13.5px;
+  font-size: 14px;
 }
 .xa-nl svg {
   flex: none;
@@ -578,11 +578,11 @@
 .xv-seg button {
   padding: 6px 4px;
   border: 0;
-  border-radius: 7px;
+  border-radius: 8px;
   background: transparent;
   color: var(--muted);
   font: inherit;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;

@@ -26,7 +26,7 @@ function dashboard() {
       )
       .join('')}</div>
     ${needsAttentionCard(u.id)}
-    <div class="row c21">${myWeekCard(u.id)}${myMonthCard(u.id)}</div>
+    <div class="row c21 wkrow">${myWeekCard(u.id)}${myMonthCard(u.id)}</div>
     <div class="row c21"><div class="card"><div class="head"><div><h2>Leave balance</h2><p class="sub">Days remaining this year</p></div><button class="link" onclick="go('leave')">Details ${ic('arrow', 14)}</button></div>
       <div class="rings">${Object.entries(bal)
         .map(([k, v]) => ring((v.left / v.t) * 100, v.left, POLICY[k].n, POLICY[k].c))

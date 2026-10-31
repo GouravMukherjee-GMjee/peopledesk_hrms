@@ -16,7 +16,7 @@
   background: transparent;
   min-height: 32px;
   padding: 4px 13px;
-  border-radius: 7px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
   color: var(--muted);

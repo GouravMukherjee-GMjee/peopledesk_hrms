@@ -2502,6 +2502,71 @@ function decorateTables(root = document.getElementById('view')) {
   });
 }
 
+/* js/components/icon-tooltips.js */
+/* icon-only controls (no visible text) show a small tooltip with their name on hover and keyboard focus */
+(function () {
+  const SEL = 'button, a, [role="button"], [role="link"], .icon-btn, .pf-avbtn';
+  let tip, cur, timer;
+
+  function label(el) {
+    if (el.matches('[aria-expanded]') && el.closest('.dd')) return '';
+    if (el.textContent.trim()) return '';
+    return el.dataset.tip || el.getAttribute('aria-label') || el.getAttribute('title') || '';
+  }
+  function ensure() {
+    if (tip) return tip;
+    tip = document.createElement('div');
+    tip.className = 'ic-tip';
+    tip.setAttribute('role', 'tooltip');
+    document.body.appendChild(tip);
+    return tip;
+  }
+  function show(el) {
+    const t = label(el);
+    if (!t) return;
+    /* swap the native title for ours so the browser doesn't show two tooltips */
+    if (el.hasAttribute('title')) {
+      el.dataset.tip = el.getAttribute('title');
+      el.removeAttribute('title');
+    }
+    cur = el;
+    const n = ensure();
+    n.textContent = t;
+    n.classList.add('on');
+    const r = el.getBoundingClientRect(),
+      w = n.offsetWidth,
+      h = n.offsetHeight;
+    let left = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+    let top = r.bottom + 8;
+    if (top + h > innerHeight - 8) top = r.top - h - 8;
+    n.style.left = left + 'px';
+    n.style.top = top + 'px';
+  }
+  function hide() {
+    clearTimeout(timer);
+    cur = null;
+    if (tip) tip.classList.remove('on');
+  }
+  document.addEventListener('mouseover', e => {
+    const el = e.target.closest && e.target.closest(SEL);
+    if (!el || el === cur) return;
+    clearTimeout(timer);
+    timer = setTimeout(() => show(el), 250);
+  });
+  document.addEventListener('mouseout', e => {
+    const el = e.target.closest && e.target.closest(SEL);
+    if (el && !el.contains(e.relatedTarget)) hide();
+  });
+  document.addEventListener('focusin', e => {
+    const el = e.target.closest && e.target.closest(SEL);
+    if (el && el.matches(':focus-visible')) show(el);
+  });
+  document.addEventListener('focusout', hide);
+  document.addEventListener('click', hide, true);
+  document.addEventListener('scroll', hide, true);
+  document.addEventListener('keydown', e => e.key === 'Escape' && hide());
+})();
+
 /* js/components/home-blocks.js */
 /* =============== home screens: building blocks =============== */
 const TD = () => [TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate()];
@@ -2894,7 +2959,7 @@ function resetCols() {
 }
 const colsCtl = () => {
   const d = document.documentElement.dataset.density || 'normal';
-  return `<span class="colw desk"><button class="btn sm" aria-haspopup="true" aria-label="Display options" aria-expanded="${!!S.colMenu}" onclick="S.colMenu=!S.colMenu;render()">${ic('sliders', 14)}<span class="lbl">Display</span></button>${
+  return `<span class="colw desk"><button class="btn sm" aria-haspopup="true" aria-label="Display options" title="Display options" aria-expanded="${!!S.colMenu}" onclick="S.colMenu=!S.colMenu;render()">${ic('sliders', 14)}<span class="lbl">Display</span></button>${
     S.colMenu
       ? `<div class="colpop" role="group" aria-label="Display options">${
           S.page === 'employees'
@@ -3970,7 +4035,6 @@ function profilePage() {
     t = S.tab.prof || 'personal',
     s = slip(e.ctc);
   const hero = `<div class="card prof-hero"><div class="pf-top"><button class="pf-avbtn" onclick="photoDialog()" aria-label="Change profile photo" title="Change profile photo">${av(e.name, 84)}<span class="pf-cam">${ic('camera', 15)}</span></button><div class="ph-main"><h2>${esc(e.name)}</h2><p class="muted">${esc(e.title)} · ${esc(e.dept)}</p><div class="chips2" style="margin-top:8px">${stChip(e.status)}${chip(e.id, 'mute', 1)}${chip(roleName(S.role), 'info', 1)}</div></div>
-    <div class="ph-acts"><button class="btn primary" onclick="editMyProfile()">${ic('sliders', 16)}Edit my details</button><button class="btn" onclick="S.attEmp='';go('attendance')">${ic('clock', 16)}My attendance</button><button class="btn" onclick="downloadProfile()">${ic('download', 16)}Download PDF</button></div></div>
     <div class="ph-facts">${[
       ['Location', e.loc],
       ['Reports to', reportsTo(e)],
@@ -3978,7 +4042,8 @@ function profilePage() {
       ['Tenure', tenure(e.join)]
     ]
       .map(([a, v]) => `<div class="pfact"><span>${a}</span><b>${esc(v)}</b></div>`)
-      .join('')}</div></div>`;
+      .join('')}</div>
+<div class="ph-acts"><button class="btn primary ibtn" onclick="editMyProfile()" title="Edit my details" aria-label="Edit my details">${ic('sliders', 16)}</button><button class="btn ibtn" onclick="S.attEmp='';go('attendance')" title="My attendance" aria-label="My attendance">${ic('clock', 16)}</button><button class="btn ibtn" onclick="downloadProfile()" title="Download PDF" aria-label="Download PDF">${ic('download', 16)}</button></div></div></div>`;
   let body = '';
   if (t === 'personal')
     body = `<div class="row c2"><div class="card"><div class="head"><div><h2>Personal details</h2><p class="sub">How we know and reach you</p></div><button class="link" onclick="editMyProfile()">Edit</button></div><div class="list">${r.personal.map(x => pRow(...x)).join('')}</div></div>
@@ -4346,7 +4411,7 @@ function dashboard() {
       )
       .join('')}</div>
     ${needsAttentionCard(u.id)}
-    <div class="row c21">${myWeekCard(u.id)}${myMonthCard(u.id)}</div>
+    <div class="row c21 wkrow">${myWeekCard(u.id)}${myMonthCard(u.id)}</div>
     <div class="row c21"><div class="card"><div class="head"><div><h2>Leave balance</h2><p class="sub">Days remaining this year</p></div><button class="link" onclick="go('leave')">Details ${ic('arrow', 14)}</button></div>
       <div class="rings">${Object.entries(bal)
         .map(([k, v]) => ring((v.left / v.t) * 100, v.left, POLICY[k].n, POLICY[k].c))
@@ -8502,7 +8567,7 @@ function switchRole(k) {
   toast('Now previewing as ' + persona().n + ' (' + me().name + ')');
 }
 function roleCards(cur, fn) {
-  return `<div class="rolegrp rolelist" role="radiogroup" aria-label="Preview as">${PERSONAS.map(r => `<button type="button" class="rolec rl" role="radio" aria-checked="${cur === r.k}" tabindex="${cur === r.k ? 0 : -1}" onclick="${fn}('${r.k}')" onkeydown="roleKey(event,'${fn}')"><span class="rl-i">${ic(r.i, 18)}</span><span class="rl-t"><b>${r.n}</b><span class="rl-p">${esc(emp(r.emp).name)}</span><span class="rl-d">${esc(r.d)}</span></span>${cur === r.k ? `<span class="rl-ck">${ic('check', 16)}</span>` : ''}</button>`).join('')}</div>`;
+  return `<div class="rolegrp rolelist" role="radiogroup" aria-label="Preview as">${PERSONAS.map(r => `<button type="button" class="rolec rl" role="radio" aria-checked="${cur === r.k}" tabindex="${cur === r.k ? 0 : -1}" title="${esc(emp(r.emp).name)} · ${esc(r.d)}" onclick="${fn}('${r.k}')" onkeydown="roleKey(event,'${fn}')"><span class="rl-i">${ic(r.i, 18)}</span><span class="rl-t"><b>${r.n}</b><span class="rl-p">${esc(emp(r.emp).name)}</span><span class="rl-d">${esc(r.d)}</span></span>${cur === r.k ? `<span class="rl-ck">${ic('check', 16)}</span>` : ''}</button>`).join('')}</div>`;
 }
 function roleKey(e, fn) {
   const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
@@ -10221,7 +10286,7 @@ function saveViewGo() {
   const _ep = employeesPage;
   employeesPage = function () {
     let h = _ep();
-    return h.replace('<div id="elist">', fchips() + '<div id="elist">');
+    return h.replace('<div class="grow"></div>', fchips() + '<div class="grow"></div>');
   };
 }
 {

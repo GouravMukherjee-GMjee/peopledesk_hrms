@@ -1006,7 +1006,7 @@ tbody tr.click:hover td:first-child:not(:has(.person)) {
   background: transparent;
   min-height: 32px;
   padding: 4px 13px;
-  border-radius: 7px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
   color: var(--muted);
@@ -6279,7 +6279,7 @@ input[type="checkbox"]:disabled {
   .card.kpi .ki {
     width: 30px;
     height: 30px;
-    border-radius: 9px;
+    border-radius: 10px;
   }
   .card.kpi .ki svg {
     width: 16px;
@@ -7047,7 +7047,6 @@ html {
 }
 
 .rolegrp.rolelist {
-  grid-template-columns: 1fr !important;
   display: grid !important;
 }
 .rolec.rl .rl-d {
@@ -7191,7 +7190,7 @@ input[type="radio"] {
 .tab {
   min-height: 32px;
   padding: 4px 14px;
-  border-radius: 9px;
+  border-radius: 10px;
   font-weight: 600;
   color: var(--muted);
   transition:
@@ -7451,7 +7450,7 @@ kbd,
   flex: none;
   width: 30px;
   height: 30px;
-  border-radius: 9px;
+  border-radius: 10px;
   display: inline-grid;
   place-items: center;
   color: color-mix(in srgb, var(--h, var(--brand)) 80%, var(--text, #000));
@@ -7807,6 +7806,585 @@ tr.click:hover td:first-child .btn {
   border: 1px solid color-mix(in srgb, var(--green) 45%, transparent);
 }
 
+/* tighter title / subtitle spacing */
+.ph h1 {
+  line-height: 1.2;
+}
+.ph p {
+  line-height: 1.35;
+  margin-top: 2px;
+}
+.card h2 {
+  line-height: 1.25;
+}
+.card .sub {
+  line-height: 1.35;
+  margin-top: 0;
+}
+.card .head h2 .cti {
+  width: 28px;
+  height: 28px;
+}
+.card .head h2 + .sub,
+.card .head h2 + p.sub {
+  margin-top: -2px;
+}
+.card .head .sub {
+  margin-left: 38px;
+}
+
+/* card hyperlinks get a trailing arrow (unless they already carry an icon) */
+.card .head .link:not(:has(svg))::after,
+.card .apr-foot .link:not(:has(svg))::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  flex: none;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  transition: transform 0.15s ease;
+}
+.card .head .link:hover::after,
+.card .apr-foot .link:hover::after {
+  transform: translateX(2px);
+}
+.card .head .link:hover,
+.card .apr-foot .link:hover {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 3px;
+}
+
+/* compact table rows, headers and avatars */
+html:not([data-density]) table th {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  line-height: 1.3;
+}
+html:not([data-density]) table td {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  line-height: 1.35;
+}
+table .avatar {
+  width: 28px !important;
+  height: 28px !important;
+  font-size: 11px !important;
+}
+
+/* table cells stay on one line; the table scrolls sideways instead of wrapping */
+.tw table td,
+.tw table th {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.tw table td > div,
+.tw table td > span,
+.tw table td .chip,
+.tw table td b,
+.tw table td .small,
+.tw table td .muted {
+  white-space: nowrap;
+}
+.tw table {
+  width: 100%;
+  min-width: max-content;
+}
+/* free-text columns (reasons, notes) opt in to wrapping with a sensible width */
+.tw table td.wrap,
+.tw table td.wrap * {
+  white-space: normal;
+  min-width: 200px;
+  max-width: 360px;
+}
+.tw table td:has(> .avatar, > div > .avatar) {
+  min-width: 180px;
+}
+.tw table td .btn,
+.tw table td .chip {
+  flex: none;
+}
+
+/* toolbar: one control height and one type size across search, dropdowns, tabs and buttons */
+.tools {
+  --tool-h: 34px;
+  gap: 8px;
+  align-items: center;
+}
+.tools .sbox,
+.tools .dd-btn,
+.tools select.sel,
+.tools .btn,
+.tools .btn.sm,
+.tools .colw > .btn {
+  min-height: var(--tool-h);
+  height: var(--tool-h);
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 13px;
+  border-radius: 10px;
+}
+.tools .sbox {
+  padding: 0 10px;
+  gap: 6px;
+}
+.tools .sbox input {
+  min-height: 0;
+  height: 100%;
+  font-size: 13px;
+}
+.tools .sbox svg {
+  width: 15px;
+  height: 15px;
+}
+.tools .dd-btn {
+  padding: 0 10px 0 12px;
+  font-weight: 500;
+}
+.tools .btn svg,
+.tools .dd-btn svg {
+  width: 15px;
+  height: 15px;
+}
+.tools .tabs {
+  padding: 2px;
+  gap: 2px;
+  border-radius: 10px;
+  height: var(--tool-h);
+  align-items: stretch;
+}
+.tools .tab {
+  min-height: 0;
+  padding: 0 12px;
+  font-size: 13px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+}
+.tools .tabs .tab svg {
+  width: 15px;
+  height: 15px;
+}
+.tools #ecount {
+  font-size: 13px;
+}
+
+/* applied filter chips and their actions */
+.fchips {
+  gap: 6px;
+  margin: 0 0 10px;
+}
+.fchips .chip.fc {
+  height: 26px;
+  padding: 0 4px 0 10px;
+  font-size: 13px;
+}
+.fchips .chip.fc button {
+  width: 18px;
+  height: 18px;
+}
+.fchips .link {
+  font-size: 13px;
+  font-weight: 600;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 8px;
+}
+.fchips .link:hover {
+  background: var(--brand-soft);
+  text-decoration: none;
+}
+
+/* no second line for table data, chips, buttons or list rows, at any screen width */
+table td,
+table th,
+table td *,
+.rt.aw.keep td:first-child .person b,
+.tools .btn,
+.chip,
+.btn,
+.li > b,
+.li .chip {
+  white-space: nowrap;
+}
+table td.wrap,
+table td.wrap * {
+  white-space: normal;
+}
+.li .grow,
+.person > div {
+  min-width: 0;
+}
+.li .grow > .small,
+.li .grow > b,
+.person b,
+.person .muted {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* applied filters sit inline in the toolbar, on the same line as the other controls */
+.fchips[hidden] {
+  display: none;
+}
+.tools .fchips {
+  margin: 0;
+  flex-wrap: nowrap;
+  flex: none;
+}
+.tools .fchips .link {
+  white-space: nowrap;
+  padding: 0 6px;
+}
+
+/* Display control: icon only */
+.tools .colw > .btn .lbl {
+  display: none;
+}
+.tools .colw > .btn {
+  width: var(--tool-h);
+  padding: 0;
+  gap: 0;
+}
+
+/* one height for every single-line field: text, number, date, time, select, dropdown, search */
+:root {
+  --ctl-h: 38px;
+}
+@media (max-width: 900px) {
+  :root {
+    --ctl-h: 40px;
+  }
+}
+.field input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),
+.field select,
+.field .dd-btn,
+select.sel,
+.dd-btn,
+.sbox,
+.modal input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),
+.modal select,
+.card input[type="date"],
+.card input[type="time"],
+.card input[type="number"],
+.card input[type="text"],
+.card input[type="email"],
+.card input[type="tel"],
+.card input[type="password"],
+.card select:not(.sel) {
+  height: var(--ctl-h);
+  min-height: var(--ctl-h);
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 14px;
+  line-height: 1.2;
+  box-sizing: border-box;
+}
+.sbox input {
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+}
+.dd-btn {
+  padding-left: 12px;
+  padding-right: 10px;
+}
+.field textarea {
+  min-height: calc(var(--ctl-h) * 2);
+  padding-top: 9px;
+  padding-bottom: 9px;
+  line-height: 1.4;
+}
+.field input[type="date"],
+.field input[type="time"] {
+  padding-left: 12px;
+  padding-right: 8px;
+}
+/* toolbar controls keep their own compact height */
+.tools .sbox,
+.tools .dd-btn,
+.tools select.sel {
+  height: var(--tool-h);
+  min-height: var(--tool-h);
+}
+
+/* profile hero: name, key facts and icon actions on one row */
+.prof-hero .pf-top {
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+.prof-hero .pf-top .ph-main {
+  flex: 0 1 auto;
+  min-width: 200px;
+}
+.prof-hero .ph-facts {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-top: 0;
+  min-width: 0;
+}
+.prof-hero .pfact {
+  padding: 2px 22px;
+  border-left: 1px solid var(--line);
+  white-space: nowrap;
+}
+.prof-hero .pfact b {
+  font-size: 14px;
+}
+.prof-hero .ph-acts {
+  flex: none;
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+.ph-acts .btn.ibtn {
+  width: 36px;
+  min-height: 36px;
+  height: 36px;
+  padding: 0;
+  gap: 0;
+}
+@media (max-width: 1100px) {
+  .prof-hero .pf-top {
+    flex-wrap: wrap;
+  }
+  .prof-hero .ph-main {
+    flex: 1 1 240px;
+  }
+  .prof-hero .ph-facts {
+    order: 3;
+    flex: 1 1 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .prof-hero .pfact:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+@media (max-width: 520px) {
+  .ph-acts .btn.ibtn {
+    flex: none;
+  }
+  .prof-hero .ph-acts {
+    width: auto;
+  }
+}
+
+/* tooltip for icon-only controls */
+.ic-tip {
+  position: fixed;
+  z-index: 3000;
+  max-width: 240px;
+  padding: 5px 9px;
+  border-radius: 8px;
+  background: #1d2535;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-2px);
+  transition:
+    opacity 0.12s ease,
+    transform 0.12s ease;
+  box-shadow: 0 4px 12px rgba(16, 32, 64, 0.25);
+}
+.ic-tip.on {
+  opacity: 1;
+  transform: none;
+}
+@media (hover: none) {
+  .ic-tip {
+    display: none;
+  }
+}
+
+/* clock card: work mode dropdown and the clock in/out button share one height and baseline */
+.ck-r {
+  align-items: flex-end;
+}
+.ck-r .field .dd-btn,
+.ck-r .field select,
+.ck-r > .btn.big {
+  height: 46px;
+  min-height: 46px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.ck-r > .btn.big {
+  padding: 0 28px;
+  align-self: flex-end;
+}
+.ck-r .field {
+  margin: 0;
+}
+
+/* weekly attendance card: the table fills the card, rows share the height, the hours bar sits at the bottom */
+.card:has(> .wkfoot) {
+  display: flex;
+  flex-direction: column;
+}
+.card:has(> .wkfoot) > .tw {
+  flex: 0 0 auto;
+  max-height: none !important;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+.card:has(> .wkfoot) > .tw table {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+.card:has(> .wkfoot) > .tw table tbody tr {
+  height: 52px;
+}
+.card:has(> .wkfoot) > .tw table td {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.card:has(> .wkfoot) .wkfoot {
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+/* weekly table + month calendar: calendar is narrower, so it is shorter and the table rows stay moderate */
+.dashboard-view > .row.c21.wkrow {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 400px);
+}
+.card:has(> .wkfoot) > .tw table tbody tr {
+  height: 46px;
+}
+.card:has(> .wkfoot) > .tw table td {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.mcard .mcal {
+  gap: 5px;
+}
+@media (max-width: 900px) {
+  .dashboard-view > .row.c21.wkrow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* one row height for every data table (desktop); density setting still scales it */
+:root {
+  --row-h: 48px;
+  --head-h: 40px;
+}
+html[data-density="compact"] {
+  --row-h: 40px;
+  --head-h: 34px;
+}
+html[data-density="comfortable"] {
+  --row-h: 56px;
+  --head-h: 44px;
+}
+@media (min-width: 901px) {
+  html .tw table:not(.rost) tbody tr > td {
+    height: var(--row-h);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    line-height: 1.35;
+    vertical-align: middle;
+    box-sizing: border-box;
+  }
+  html .tw table:not(.rost) thead tr > th {
+    height: var(--head-h);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    vertical-align: middle;
+    box-sizing: border-box;
+  }
+  .tw table:not(.rost) td .btn,
+  .tw table:not(.rost) td .btn.sm {
+    min-height: 30px;
+    height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .tw table:not(.rost) td .chip {
+    min-height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: inline-flex;
+    align-items: center;
+  }
+  .tw table:not(.rost) td .avatar {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .tw table:not(.rost) td input[type="checkbox"] {
+    margin: 0;
+  }
+  /* empty-state and total rows follow the same rhythm */
+  .tw table tbody tr.tot > td {
+    height: var(--row-h);
+  }
+}
+
+/* settings cards: title and description on the left, the on/off switch pinned to the right edge */
+.stc-h {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.stc-h > .grow {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.stc-h > .sw {
+  flex: none;
+  margin-left: auto;
+  margin-top: 2px;
+}
+.stc {
+  padding: 14px 16px;
+}
+.stc-b {
+  margin-top: 12px;
+}
+.stc-b .field:last-child {
+  margin-bottom: 0;
+}
+
+/* dialog and drawer footers: every action sits on the right, the main action last */
+.modal .mf,
+.ov.drawer .modal .mf {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+.modal .mf > * {
+  margin-left: 0;
+  margin-right: 0;
+}
+.modal .mf .so-l {
+  margin-right: 0;
+}
+.modal .mf .btn.primary,
+.modal .mf .btn.bad {
+  order: 2;
+}
+.modal .mf .btn:not(.primary):not(.bad) {
+  order: 1;
+}
+
 /* css/components/destructive-icons.css */
 /* =====================================================================
    Destructive icons: every cross (close, remove, reject) and trash (delete, clear)
@@ -7840,57 +8418,75 @@ button:has(svg path[d^="M3 6h18"]):focus-visible {
 
 /* css/components/account-modal.css */
 /* =====================================================================
-   Account modal: profile card, compact role switcher, grouped settings
+   Account modal: profile row, two-column role picker, grouped settings
    ===================================================================== */
+.modal:has(.acct) {
+  width: min(520px, 100%);
+}
 .acct {
   display: grid;
-  gap: 20px;
+  gap: 18px;
 }
 .acct-hero {
-  position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "av name"
+    "av title"
+    "av chips"
+    "btn btn";
+  column-gap: 14px;
+  row-gap: 1px;
   align-items: center;
-  gap: 2px;
-  padding: 98px 16px 16px;
-  text-align: center;
+  justify-items: start;
+  padding: 16px;
+  text-align: left;
   border: 1px solid var(--line);
-  border-radius: 16px;
-  overflow: hidden;
+  border-radius: 14px;
   background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--brand) 22%, var(--brand-soft)) 0,
-    var(--brand-soft) 58px,
-    var(--surface2) 58px
+    135deg,
+    color-mix(in srgb, var(--brand) 12%, var(--surface)) 0,
+    var(--surface2) 75%
   );
 }
 .acct-av {
-  position: absolute;
-  top: 24px;
-  left: 50%;
-  transform: translateX(-50%);
+  grid-area: av;
   display: grid;
 }
 .acct-av .avatar {
+  width: 64px !important;
+  height: 64px !important;
+  font-size: 22px !important;
   box-shadow:
-    0 0 0 4px var(--surface),
+    0 0 0 3px var(--surface),
     var(--shadow-md);
 }
 .acct-n {
-  font-size: 18px;
+  grid-area: name;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.2px;
+  line-height: 1.25;
 }
 .acct-t {
+  grid-area: title;
   color: var(--muted);
   font-size: 13px;
+  line-height: 1.3;
 }
 .acct .chips2 {
-  justify-content: center;
-  margin: 8px 0 12px;
+  grid-area: chips;
   display: flex;
-  gap: 6px;
   flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-start;
+  margin: 6px 0 0;
+}
+.acct-hero > .btn {
+  grid-area: btn;
+  justify-self: stretch;
+  margin-top: 14px;
+  background: var(--surface);
 }
 .acct .sec-t {
   margin: 0 2px 8px;
@@ -7900,38 +8496,270 @@ button:has(svg path[d^="M3 6h18"]):focus-visible {
   text-transform: uppercase;
   color: var(--muted);
 }
+/* role picker: equal tiles, role + person only (description is in the tooltip) */
 .acct .rolegrp.rolelist {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 .acct .rolec.rl {
-  padding: 10px 12px;
+  min-height: 52px;
+  height: 52px;
+  padding: 0 10px;
+  gap: 10px;
+  align-items: center;
   border-radius: 12px;
-  gap: 12px;
+}
+.acct .rl-i {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+}
+.acct .rl-i svg {
+  width: 16px;
+  height: 16px;
+}
+.acct .rl-t {
+  gap: 0;
+}
+.acct .rl-t b {
+  font-size: 13px;
+  line-height: 1.25;
+}
+.acct .rl-p {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .acct .rl-d {
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  font-size: 12px;
+  display: none;
 }
+.acct .rl-ck svg {
+  width: 14px;
+  height: 14px;
+}
+/* settings list */
 .acct .grp {
   border: 1px solid var(--line);
   border-radius: 14px;
-  padding: 0 14px;
+  padding: 0 12px;
   background: var(--surface);
 }
 .acct .grp .li {
-  padding: 12px 0;
+  padding: 10px 0;
   gap: 12px;
+  align-items: center;
+}
+.acct .grp .li + .li {
+  border-top: 1px solid var(--line);
 }
 .acct .li .ai {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 10px;
+}
+.acct .grp .li b {
+  font-size: 14px;
+}
+.acct .grp .li .small {
+  font-size: 12px;
+}
+.acct .grp .li .btn.sm {
+  min-height: 30px;
+  height: 30px;
+  padding: 0 12px;
+  font-size: 13px;
 }
 .modal .mf .so-l {
   margin-right: auto;
+}
+@media (max-width: 520px) {
+  .acct .rolegrp.rolelist {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* wide screens: two columns so the whole account fits without scrolling */
+@media (min-width: 700px) {
+  .modal:has(.acct) {
+    width: min(860px, 100%);
+  }
+  .modal:has(.acct) .mb {
+    overflow: visible;
+    padding-bottom: 8px;
+  }
+  .acct {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "hero set"
+      "role set";
+    align-items: start;
+    gap: 16px 20px;
+  }
+  .acct > .acct-hero {
+    grid-area: hero;
+  }
+  .acct > .sec:nth-child(2) {
+    grid-area: role;
+  }
+  .acct > .sec:nth-child(3) {
+    grid-area: set;
+  }
+  .acct .grp .li {
+    padding: 12px 0;
+  }
+}
+
+/* tighter profile card and a compact 2x2 role picker */
+.acct-hero {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "av name btn"
+    "av title btn"
+    "av chips btn";
+  padding: 14px;
+  column-gap: 12px;
+}
+.acct-hero > .btn {
+  align-self: center;
+  justify-self: end;
+  margin-top: 0;
+  min-height: 32px;
+  height: 32px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+.acct .chips2 {
+  margin-top: 4px;
+}
+.acct .rolegrp.rolelist {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.acct .rolec.rl {
+  height: 42px;
+  min-height: 42px;
+  padding: 0 10px;
+  gap: 8px;
+  align-items: center;
+}
+.acct .rl-i {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+}
+.acct .rl-i svg {
+  width: 14px;
+  height: 14px;
+}
+.acct .rl-p {
+  display: none;
+}
+.acct .rl-t b {
+  font-size: 13px;
+  font-weight: 600;
+}
+.acct .rl-ck {
+  margin-left: auto;
+}
+.acct .sec-t {
+  margin-bottom: 6px;
+}
+@media (max-width: 520px) {
+  .acct-hero {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "av name"
+      "av title"
+      "av chips"
+      "btn btn";
+  }
+  .acct-hero > .btn {
+    justify-self: stretch;
+    margin-top: 10px;
+  }
+  .acct .rolegrp.rolelist {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* role picker everywhere (account modal and phone sheet): two compact tiles per row */
+.rolegrp.rolelist {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.rolegrp.rolelist .rolec.rl {
+  height: 38px;
+  min-height: 38px;
+  padding: 0 10px;
+  gap: 8px;
+  align-items: center;
+  border-radius: 10px;
+}
+.rolegrp.rolelist .rl-i {
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+}
+.rolegrp.rolelist .rl-i svg {
+  width: 14px;
+  height: 14px;
+}
+.rolegrp.rolelist .rl-p,
+.rolegrp.rolelist .rl-d {
+  display: none;
+}
+.rolegrp.rolelist .rl-t b {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rolegrp.rolelist .rl-ck {
+  margin-left: auto;
+}
+.rolegrp.rolelist .rl-ck svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* three roles per row (the last two share the bottom row); icon chips carry a visible tint */
+.rolegrp.rolelist {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.rolegrp.rolelist .rolec.rl {
+  grid-column: auto;
+  padding: 0 8px;
+  gap: 7px;
+}
+.rolegrp.rolelist .rolec.rl:nth-child(1) {
+  --h: var(--blue, #3b6fd4);
+}
+.rolegrp.rolelist .rolec.rl:nth-child(2) {
+  --h: var(--green, #16a34a);
+}
+.rolegrp.rolelist .rolec.rl:nth-child(3) {
+  --h: var(--violet, #7c3aed);
+}
+.rolegrp.rolelist .rolec.rl:nth-child(4) {
+  --h: var(--amber, #d97706);
+}
+.rolegrp.rolelist .rolec.rl:nth-child(5) {
+  --h: var(--red, #dc2626);
+}
+.rolegrp.rolelist .rolec.rl .rl-i {
+  background: color-mix(in srgb, var(--h, var(--brand)) 18%, var(--surface));
+  color: color-mix(in srgb, var(--h, var(--brand)) 85%, var(--text));
+}
+.rolegrp.rolelist .rolec.rl[aria-checked="true"] .rl-i {
+  background: var(--h, var(--brand));
+  color: #fff;
+}
+.rolegrp.rolelist .rl-ck {
+  display: none;
 }
 
 /* css/themes/dark-layers.css */
@@ -8155,7 +8983,7 @@ body.locked .ai-scrim {
   grid-template-columns: max-content 1fr;
   gap: 5px 12px;
   margin: 6px 0 8px;
-  font-size: 13.5px;
+  font-size: 14px;
 }
 .ai-kv dt {
   color: var(--muted);
@@ -8624,7 +9452,7 @@ body.locked .ai-scrim {
   gap: 6px 14px;
 }
 .ai-kv dt {
-  font-size: 12.5px;
+  font-size: 13px;
 }
 .ai-flag {
   padding: 6px 8px;
@@ -8645,7 +9473,7 @@ body.locked .ai-scrim {
 }
 .ai-draft {
   background: var(--surface2);
-  font-size: 13.5px;
+  font-size: 14px;
   min-height: 140px;
 }
 .ai-row .btn.sm {
@@ -8684,7 +9512,7 @@ body.locked .ai-scrim {
   margin: 0 auto;
   max-width: 340px;
   color: var(--muted);
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.5;
 }
 .ai-lbl2 {
@@ -8739,7 +9567,7 @@ body.locked .ai-scrim {
   flex: none;
   width: 32px;
   height: 32px;
-  border-radius: 9px;
+  border-radius: 10px;
   background: var(--brand-soft);
   color: var(--brand-ink);
 }
@@ -9196,7 +10024,7 @@ body.locked .ai-scrim {
 }
 .xw-h p {
   color: var(--xw-muted);
-  font-size: 12.5px;
+  font-size: 13px;
   margin-top: 1px;
 }
 .xw-ha {
@@ -9310,7 +10138,7 @@ body.locked .ai-scrim {
   gap: 5px;
   padding: 3px 10px 3px 8px;
   border-radius: 99px;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -9318,7 +10146,7 @@ body.locked .ai-scrim {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 500;
   padding: 2px 10px;
   border-radius: 99px;
@@ -9368,7 +10196,7 @@ body.locked .ai-scrim {
   display: flex;
   justify-content: space-between;
   margin-top: 6px;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--xw-muted);
 }
 .xw-tiles {
@@ -9385,7 +10213,7 @@ body.locked .ai-scrim {
 }
 .xw-tile span {
   display: block;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--t-ink);
   opacity: 0.85;
@@ -9451,7 +10279,7 @@ body.locked .ai-scrim {
 .xw-note {
   margin-top: 10px;
   text-align: center;
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--xw-muted);
 }
 .xw-btn {
@@ -9503,7 +10331,7 @@ body.locked .ai-scrim {
   border-radius: 8px;
   background: var(--xw-text);
   color: var(--xw-bg);
-  font-size: 12.5px;
+  font-size: 13px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -9577,7 +10405,7 @@ body.locked .ai-scrim {
   bottom: -2px;
   min-width: 18px;
   padding: 1px 4px;
-  border-radius: 9px;
+  border-radius: 10px;
   font:
     700 11px/14px system-ui,
     "Segoe UI",
@@ -9728,7 +10556,7 @@ body.locked .ai-scrim {
   border-radius: 10px;
   background: var(--teal-soft);
   color: var(--teal-ink);
-  font-size: 13.5px;
+  font-size: 14px;
 }
 .xa-priv svg {
   flex: none;
@@ -9917,7 +10745,7 @@ body.locked .ai-scrim {
   border-radius: 8px;
   background: var(--text);
   color: var(--surface);
-  font-size: 12.5px;
+  font-size: 13px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -10106,7 +10934,7 @@ body.locked .ai-scrim {
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--surface);
-  font-size: 13.5px;
+  font-size: 14px;
 }
 .xa-nl svg {
   flex: none;
@@ -10191,11 +11019,11 @@ body.locked .ai-scrim {
 .xv-seg button {
   padding: 6px 4px;
   border: 0;
-  border-radius: 7px;
+  border-radius: 8px;
   background: transparent;
   color: var(--muted);
   font: inherit;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
@@ -10384,7 +11212,7 @@ body.locked .ai-scrim {
 .hx-seg button {
   padding: 7px 16px;
   border: 0;
-  border-radius: 7px;
+  border-radius: 8px;
   background: transparent;
   color: var(--muted);
   font: inherit;
@@ -10453,7 +11281,7 @@ body.locked .ai-scrim {
 .hx-cs {
   margin-top: 4px;
   color: var(--muted);
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 1.35;
 }
 .hx-cd.up {
@@ -10601,7 +11429,7 @@ body.locked .ai-scrim {
   display: flex;
   flex-wrap: wrap;
   gap: 6px 14px;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 .hx-leg span {
@@ -10697,7 +11525,7 @@ body.locked .ai-scrim {
   opacity: 0.55;
 }
 .hx-val {
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -10753,7 +11581,7 @@ body.locked .ai-scrim {
 }
 .hx-tg {
   min-height: 16px;
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--muted);
   text-align: center;
   line-height: 1.2;
@@ -10884,7 +11712,7 @@ button.hx-hc:focus-visible {
   background: var(--amber-soft);
   color: var(--amber-ink);
   font: inherit;
-  font-size: 12.5px;
+  font-size: 13px;
   cursor: pointer;
 }
 /* empty, error, loading */
@@ -11009,7 +11837,7 @@ button.hx-hc:focus-visible {
 }
 .hx-cmp span {
   display: block;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 .hx-cmp b {
@@ -11168,7 +11996,7 @@ button.hx-hc:focus-visible {
 }
 .hx-ck .person span span {
   display: block;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 /* requests */
@@ -11276,7 +12104,7 @@ button.hx-hc:focus-visible {
 }
 .hx-ls span {
   display: block;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 .hx-ls .r {
@@ -11326,7 +12154,7 @@ button.hx-hc:focus-visible {
   min-width: 0;
 }
 .hx-pick .g span {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 .hx-pick .h {
@@ -11393,7 +12221,7 @@ button.hx-hc:focus-visible {
   font-size: 15px;
 }
 .hx-opt .oh span {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 .hx-opt .hv {
@@ -11500,7 +12328,7 @@ button.hx-hc:focus-visible {
   border-radius: 10px;
   background: var(--brand-soft);
   color: var(--brand-ink);
-  font-size: 13.5px;
+  font-size: 14px;
 }
 .opx-note svg {
   flex: none;
@@ -11622,4 +12450,405 @@ button.hx-hc:focus-visible {
 .hx td.num,
 .hx td:nth-child(3) {
   white-space: nowrap;
+}
+
+/* ---- layout polish: tighter cards, tidier "Hours per day" chart ---- */
+.hx-body {
+  padding-top: 12px;
+}
+.hx-top {
+  margin-bottom: 12px;
+}
+.hx-cards {
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.hx-cd {
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+.hx-cl {
+  font-size: 13px;
+}
+.hx-cv {
+  margin-top: 2px;
+  font-size: 24px;
+  line-height: 1.15;
+}
+.hx-cs {
+  margin-top: 2px;
+  font-size: 12px;
+}
+.hx-panel {
+  padding: 14px;
+  border-radius: 10px;
+}
+.hx-facts {
+  gap: 10px 20px;
+  margin-bottom: 12px;
+}
+.hx-f dd {
+  font-size: 18px;
+}
+.hx-acts {
+  margin-top: 10px;
+}
+
+/* chart header: title left, legend as small inline items */
+.hx-ch {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.hx-leg {
+  gap: 4px 14px;
+  font-size: 12px;
+}
+.hx-leg .k {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+.k.offw,
+.hx-offw {
+  border-width: 1.5px;
+}
+.k.exp {
+  width: 14px !important;
+}
+
+/* day columns: even tiles, one plot height, slim rounded bars */
+.hx-cols {
+  gap: 6px;
+}
+.hx-col {
+  gap: 4px;
+  padding: 8px 4px 6px;
+  border-color: var(--line);
+  background: var(--surface);
+  border-radius: 10px;
+}
+.hx-col.today {
+  background: var(--brand-soft);
+  border-color: var(--brand);
+}
+.hx-val {
+  font-size: 12px;
+  color: var(--text);
+}
+.hx-plot {
+  height: 120px;
+  background-color: var(--surface2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.hx-stack {
+  width: 56%;
+  max-width: 34px;
+}
+.hx-stack i:first-child {
+  border-radius: 6px 6px 0 0;
+}
+.hx-dn {
+  flex-direction: row;
+  gap: 4px;
+  font-size: 13px;
+}
+.hx-tg {
+  min-height: 14px;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.hx-tot {
+  margin: 12px 0 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--surface2);
+  font-size: 13px;
+}
+.hx-alt {
+  margin-top: 10px;
+}
+@media (max-width: 520px) {
+  .hx-plot {
+    height: 100px;
+  }
+  .hx-col {
+    padding: 6px 1px 4px;
+  }
+  .hx-dn {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* tabs and period bar: smaller gaps and controls */
+.hx-body {
+  padding-top: 8px;
+}
+.hx-top {
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.hx-seg {
+  padding: 2px;
+  border-radius: 10px;
+}
+.hx-seg button {
+  padding: 0 14px;
+  height: 30px;
+  font-size: 13px;
+  border-radius: 8px;
+}
+.hx-pn {
+  gap: 4px;
+  min-width: 0;
+}
+.hx-pn .icon-btn {
+  width: 32px;
+  height: 32px;
+}
+.hx-pl {
+  font-size: 13px;
+}
+.card.hx > .head {
+  margin-bottom: 0;
+}
+
+/* css/themes/ui-standard.css */
+/* =====================================================================
+   UI standard (final layer). One scale for type, radius, spacing, control
+   heights and surfaces. Loaded last so every screen follows it.
+   ===================================================================== */
+:root {
+  /* type scale */
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-md: 14px;
+  --fs-lg: 16px;
+  --fs-xl: 20px;
+  --fs-h1: 24px;
+  /* radius scale */
+  --r-sm: 8px;
+  --r-md: 10px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  /* spacing scale */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  /* controls: buttons and fields share one height */
+  --ctl-h: 38px;
+  --btn-h: 38px;
+  --ctl-sm: 32px;
+  --ctl-lg: 46px;
+}
+@media (max-width: 900px) {
+  :root {
+    --ctl-h: 40px;
+    --btn-h: 40px;
+    --ctl-sm: 34px;
+  }
+}
+@media (max-width: 520px) {
+  :root {
+    --ctl-h: 44px;
+    --btn-h: 44px;
+    --ctl-sm: 36px;
+  }
+}
+
+/* typography */
+body {
+  font-size: var(--fs-md);
+  line-height: 1.5;
+}
+h1,
+h2,
+h3 {
+  color: var(--text);
+  line-height: 1.25;
+}
+.ph h1 {
+  font-size: var(--fs-h1);
+}
+.card h2,
+.hx-ch h3 {
+  font-size: var(--fs-lg);
+}
+.card .sub,
+.ph p,
+.muted {
+  color: var(--muted);
+}
+.small,
+.card .sub,
+.hint,
+.err {
+  font-size: var(--fs-sm);
+}
+label {
+  font-size: var(--fs-sm);
+}
+@media (max-width: 520px) {
+  .ph h1 {
+    font-size: var(--fs-xl);
+  }
+  .card h2 {
+    font-size: 15px;
+  }
+}
+
+/* surfaces: cards, panels, groups */
+.card {
+  padding: var(--pad);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.card > .head {
+  margin-bottom: var(--sp-3);
+}
+.card > .head + .tools {
+  margin-top: 0;
+}
+.row {
+  gap: var(--gap);
+}
+.content {
+  gap: var(--gap);
+}
+.hx-panel,
+.stc,
+.acct .grp {
+  border-radius: var(--r-lg);
+}
+.modal {
+  border-radius: var(--r-xl);
+}
+
+/* buttons: three sizes, one radius */
+.btn {
+  min-height: var(--btn-h);
+  border-radius: var(--r-md);
+  font-size: var(--fs-md);
+  padding: 0 var(--sp-4);
+  gap: var(--sp-2);
+}
+.btn.sm,
+.tw td .btn,
+.tw td .btn.sm {
+  min-height: var(--ctl-sm);
+  height: var(--ctl-sm);
+  padding: 0 12px;
+  font-size: var(--fs-sm);
+  border-radius: var(--r-md);
+}
+.btn.big {
+  min-height: var(--ctl-lg);
+  height: var(--ctl-lg);
+  padding: 0 24px;
+  font-size: var(--fs-lg);
+}
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn:focus-visible,
+.link:focus-visible,
+.tab:focus-visible,
+.icon-btn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* chips: one size */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 24px;
+  padding: 0 10px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1;
+  border-radius: 99px;
+}
+
+/* fields */
+.field {
+  gap: 6px;
+  margin-bottom: var(--sp-3);
+}
+.field label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text);
+}
+.field input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),
+.field select,
+.dd-btn,
+select.sel,
+.sbox {
+  border-radius: var(--r-md);
+}
+.fg {
+  gap: 0 var(--sp-3);
+}
+
+/* tables */
+.tw {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+}
+table th {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--muted);
+}
+table td {
+  font-size: var(--fs-md);
+  color: var(--text);
+}
+table td.num,
+table th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* tooltips, toasts and overlays use the same radius */
+.ic-tip {
+  border-radius: var(--r-sm);
+}
+
+/* labels share one height so inputs in the same row line up, even when a label carries a badge */
+.field > label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+}
+.field > label .chip {
+  min-height: 20px;
+  padding: 0 8px;
+  font-size: var(--fs-xs);
+}
+.fg {
+  align-items: start;
+}
+
+/* KPI sub-lines stay on one line so cards in a row keep the same height */
+.card.kpi .kd {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

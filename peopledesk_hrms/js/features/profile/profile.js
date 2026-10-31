@@ -89,7 +89,6 @@ function profilePage() {
     t = S.tab.prof || 'personal',
     s = slip(e.ctc);
   const hero = `<div class="card prof-hero"><div class="pf-top"><button class="pf-avbtn" onclick="photoDialog()" aria-label="Change profile photo" title="Change profile photo">${av(e.name, 84)}<span class="pf-cam">${ic('camera', 15)}</span></button><div class="ph-main"><h2>${esc(e.name)}</h2><p class="muted">${esc(e.title)} · ${esc(e.dept)}</p><div class="chips2" style="margin-top:8px">${stChip(e.status)}${chip(e.id, 'mute', 1)}${chip(roleName(S.role), 'info', 1)}</div></div>
-    <div class="ph-acts"><button class="btn primary" onclick="editMyProfile()">${ic('sliders', 16)}Edit my details</button><button class="btn" onclick="S.attEmp='';go('attendance')">${ic('clock', 16)}My attendance</button><button class="btn" onclick="downloadProfile()">${ic('download', 16)}Download PDF</button></div></div>
     <div class="ph-facts">${[
       ['Location', e.loc],
       ['Reports to', reportsTo(e)],
@@ -97,7 +96,8 @@ function profilePage() {
       ['Tenure', tenure(e.join)]
     ]
       .map(([a, v]) => `<div class="pfact"><span>${a}</span><b>${esc(v)}</b></div>`)
-      .join('')}</div></div>`;
+      .join('')}</div>
+<div class="ph-acts"><button class="btn primary ibtn" onclick="editMyProfile()" title="Edit my details" aria-label="Edit my details">${ic('sliders', 16)}</button><button class="btn ibtn" onclick="S.attEmp='';go('attendance')" title="My attendance" aria-label="My attendance">${ic('clock', 16)}</button><button class="btn ibtn" onclick="downloadProfile()" title="Download PDF" aria-label="Download PDF">${ic('download', 16)}</button></div></div></div>`;
   let body = '';
   if (t === 'personal')
     body = `<div class="row c2"><div class="card"><div class="head"><div><h2>Personal details</h2><p class="sub">How we know and reach you</p></div><button class="link" onclick="editMyProfile()">Edit</button></div><div class="list">${r.personal.map(x => pRow(...x)).join('')}</div></div>

@@ -79,7 +79,6 @@
 }
 
 .rolegrp.rolelist {
-  grid-template-columns: 1fr !important;
   display: grid !important;
 }
 .rolec.rl .rl-d {

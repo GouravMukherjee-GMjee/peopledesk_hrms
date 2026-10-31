@@ -1,55 +1,73 @@
 /* =====================================================================
-   Account modal: profile card, compact role switcher, grouped settings
+   Account modal: profile row, two-column role picker, grouped settings
    ===================================================================== */
+.modal:has(.acct) {
+  width: min(520px, 100%);
+}
 .acct {
   display: grid;
-  gap: 20px;
+  gap: 18px;
 }
 .acct-hero {
-  position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "av name"
+    "av title"
+    "av chips"
+    "btn btn";
+  column-gap: 14px;
+  row-gap: 1px;
   align-items: center;
-  gap: 2px;
-  padding: 98px 16px 16px;
-  text-align: center;
+  justify-items: start;
+  padding: 16px;
+  text-align: left;
   border: 1px solid var(--line);
-  border-radius: 16px;
-  overflow: hidden;
+  border-radius: 14px;
   background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--brand) 22%, var(--brand-soft)) 0,
-    var(--brand-soft) 58px,
-    var(--surface2) 58px
+    135deg,
+    color-mix(in srgb, var(--brand) 12%, var(--surface)) 0,
+    var(--surface2) 75%
   );
 }
 .acct-av {
-  position: absolute;
-  top: 24px;
-  left: 50%;
-  transform: translateX(-50%);
+  grid-area: av;
   display: grid;
 }
 .acct-av .avatar {
+  width: 64px !important;
+  height: 64px !important;
+  font-size: 22px !important;
   box-shadow:
-    0 0 0 4px var(--surface),
+    0 0 0 3px var(--surface),
     var(--shadow-md);
 }
 .acct-n {
-  font-size: 18px;
+  grid-area: name;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.2px;
+  line-height: 1.25;
 }
 .acct-t {
+  grid-area: title;
   color: var(--muted);
   font-size: 13px;
+  line-height: 1.3;
 }
 .acct .chips2 {
-  justify-content: center;
-  margin: 8px 0 12px;
+  grid-area: chips;
   display: flex;
-  gap: 6px;
   flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-start;
+  margin: 6px 0 0;
+}
+.acct-hero > .btn {
+  grid-area: btn;
+  justify-self: stretch;
+  margin-top: 14px;
+  background: var(--surface);
 }
 .acct .sec-t {
   margin: 0 2px 8px;
@@ -59,36 +77,268 @@
   text-transform: uppercase;
   color: var(--muted);
 }
+/* role picker: equal tiles, role + person only (description is in the tooltip) */
 .acct .rolegrp.rolelist {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 .acct .rolec.rl {
-  padding: 10px 12px;
+  min-height: 52px;
+  height: 52px;
+  padding: 0 10px;
+  gap: 10px;
+  align-items: center;
   border-radius: 12px;
-  gap: 12px;
+}
+.acct .rl-i {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+}
+.acct .rl-i svg {
+  width: 16px;
+  height: 16px;
+}
+.acct .rl-t {
+  gap: 0;
+}
+.acct .rl-t b {
+  font-size: 13px;
+  line-height: 1.25;
+}
+.acct .rl-p {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .acct .rl-d {
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  font-size: 12px;
+  display: none;
 }
+.acct .rl-ck svg {
+  width: 14px;
+  height: 14px;
+}
+/* settings list */
 .acct .grp {
   border: 1px solid var(--line);
   border-radius: 14px;
-  padding: 0 14px;
+  padding: 0 12px;
   background: var(--surface);
 }
 .acct .grp .li {
-  padding: 12px 0;
+  padding: 10px 0;
   gap: 12px;
+  align-items: center;
+}
+.acct .grp .li + .li {
+  border-top: 1px solid var(--line);
 }
 .acct .li .ai {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 10px;
+}
+.acct .grp .li b {
+  font-size: 14px;
+}
+.acct .grp .li .small {
+  font-size: 12px;
+}
+.acct .grp .li .btn.sm {
+  min-height: 30px;
+  height: 30px;
+  padding: 0 12px;
+  font-size: 13px;
 }
 .modal .mf .so-l {
   margin-right: auto;
+}
+@media (max-width: 520px) {
+  .acct .rolegrp.rolelist {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* wide screens: two columns so the whole account fits without scrolling */
+@media (min-width: 700px) {
+  .modal:has(.acct) {
+    width: min(860px, 100%);
+  }
+  .modal:has(.acct) .mb {
+    overflow: visible;
+    padding-bottom: 8px;
+  }
+  .acct {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "hero set"
+      "role set";
+    align-items: start;
+    gap: 16px 20px;
+  }
+  .acct > .acct-hero {
+    grid-area: hero;
+  }
+  .acct > .sec:nth-child(2) {
+    grid-area: role;
+  }
+  .acct > .sec:nth-child(3) {
+    grid-area: set;
+  }
+  .acct .grp .li {
+    padding: 12px 0;
+  }
+}
+
+/* tighter profile card and a compact 2x2 role picker */
+.acct-hero {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "av name btn"
+    "av title btn"
+    "av chips btn";
+  padding: 14px;
+  column-gap: 12px;
+}
+.acct-hero > .btn {
+  align-self: center;
+  justify-self: end;
+  margin-top: 0;
+  min-height: 32px;
+  height: 32px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+.acct .chips2 {
+  margin-top: 4px;
+}
+.acct .rolegrp.rolelist {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.acct .rolec.rl {
+  height: 42px;
+  min-height: 42px;
+  padding: 0 10px;
+  gap: 8px;
+  align-items: center;
+}
+.acct .rl-i {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+}
+.acct .rl-i svg {
+  width: 14px;
+  height: 14px;
+}
+.acct .rl-p {
+  display: none;
+}
+.acct .rl-t b {
+  font-size: 13px;
+  font-weight: 600;
+}
+.acct .rl-ck {
+  margin-left: auto;
+}
+.acct .sec-t {
+  margin-bottom: 6px;
+}
+@media (max-width: 520px) {
+  .acct-hero {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "av name"
+      "av title"
+      "av chips"
+      "btn btn";
+  }
+  .acct-hero > .btn {
+    justify-self: stretch;
+    margin-top: 10px;
+  }
+  .acct .rolegrp.rolelist {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* role picker everywhere (account modal and phone sheet): two compact tiles per row */
+.rolegrp.rolelist {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.rolegrp.rolelist .rolec.rl {
+  height: 38px;
+  min-height: 38px;
+  padding: 0 10px;
+  gap: 8px;
+  align-items: center;
+  border-radius: 10px;
+}
+.rolegrp.rolelist .rl-i {
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+}
+.rolegrp.rolelist .rl-i svg {
+  width: 14px;
+  height: 14px;
+}
+.rolegrp.rolelist .rl-p,
+.rolegrp.rolelist .rl-d {
+  display: none;
+}
+.rolegrp.rolelist .rl-t b {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rolegrp.rolelist .rl-ck {
+  margin-left: auto;
+}
+.rolegrp.rolelist .rl-ck svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* three roles per row (the last two share the bottom row); icon chips carry a visible tint */
+.rolegrp.rolelist {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.rolegrp.rolelist .rolec.rl {
+  grid-column: auto;
+  padding: 0 8px;
+  gap: 7px;
+}
+.rolegrp.rolelist .rolec.rl:nth-child(1) {
+  --h: var(--blue, #3b6fd4);
+}
+.rolegrp.rolelist .rolec.rl:nth-child(2) {
+  --h: var(--green, #16a34a);
+}
+.rolegrp.rolelist .rolec.rl:nth-child(3) {
+  --h: var(--violet, #7c3aed);
+}
+.rolegrp.rolelist .rolec.rl:nth-child(4) {
+  --h: var(--amber, #d97706);
+}
+.rolegrp.rolelist .rolec.rl:nth-child(5) {
+  --h: var(--red, #dc2626);
+}
+.rolegrp.rolelist .rolec.rl .rl-i {
+  background: color-mix(in srgb, var(--h, var(--brand)) 18%, var(--surface));
+  color: color-mix(in srgb, var(--h, var(--brand)) 85%, var(--text));
+}
+.rolegrp.rolelist .rolec.rl[aria-checked="true"] .rl-i {
+  background: var(--h, var(--brand));
+  color: #fff;
+}
+.rolegrp.rolelist .rl-ck {
+  display: none;
 }

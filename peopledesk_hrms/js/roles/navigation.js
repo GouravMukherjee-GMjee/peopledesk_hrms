@@ -112,7 +112,7 @@ function switchRole(k) {
   toast('Now previewing as ' + persona().n + ' (' + me().name + ')');
 }
 function roleCards(cur, fn) {
-  return `<div class="rolegrp rolelist" role="radiogroup" aria-label="Preview as">${PERSONAS.map(r => `<button type="button" class="rolec rl" role="radio" aria-checked="${cur === r.k}" tabindex="${cur === r.k ? 0 : -1}" onclick="${fn}('${r.k}')" onkeydown="roleKey(event,'${fn}')"><span class="rl-i">${ic(r.i, 18)}</span><span class="rl-t"><b>${r.n}</b><span class="rl-p">${esc(emp(r.emp).name)}</span><span class="rl-d">${esc(r.d)}</span></span>${cur === r.k ? `<span class="rl-ck">${ic('check', 16)}</span>` : ''}</button>`).join('')}</div>`;
+  return `<div class="rolegrp rolelist" role="radiogroup" aria-label="Preview as">${PERSONAS.map(r => `<button type="button" class="rolec rl" role="radio" aria-checked="${cur === r.k}" tabindex="${cur === r.k ? 0 : -1}" title="${esc(emp(r.emp).name)} · ${esc(r.d)}" onclick="${fn}('${r.k}')" onkeydown="roleKey(event,'${fn}')"><span class="rl-i">${ic(r.i, 18)}</span><span class="rl-t"><b>${r.n}</b><span class="rl-p">${esc(emp(r.emp).name)}</span><span class="rl-d">${esc(r.d)}</span></span>${cur === r.k ? `<span class="rl-ck">${ic('check', 16)}</span>` : ''}</button>`).join('')}</div>`;
 }
 function roleKey(e, fn) {
   const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];

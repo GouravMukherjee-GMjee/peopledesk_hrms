@@ -192,7 +192,7 @@ body.locked .ai-scrim {
   grid-template-columns: max-content 1fr;
   gap: 5px 12px;
   margin: 6px 0 8px;
-  font-size: 13.5px;
+  font-size: 14px;
 }
 .ai-kv dt {
   color: var(--muted);
@@ -661,7 +661,7 @@ body.locked .ai-scrim {
   gap: 6px 14px;
 }
 .ai-kv dt {
-  font-size: 12.5px;
+  font-size: 13px;
 }
 .ai-flag {
   padding: 6px 8px;
@@ -682,7 +682,7 @@ body.locked .ai-scrim {
 }
 .ai-draft {
   background: var(--surface2);
-  font-size: 13.5px;
+  font-size: 14px;
   min-height: 140px;
 }
 .ai-row .btn.sm {
@@ -721,7 +721,7 @@ body.locked .ai-scrim {
   margin: 0 auto;
   max-width: 340px;
   color: var(--muted);
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.5;
 }
 .ai-lbl2 {
@@ -776,7 +776,7 @@ body.locked .ai-scrim {
   flex: none;
   width: 32px;
   height: 32px;
-  border-radius: 9px;
+  border-radius: 10px;
   background: var(--brand-soft);
   color: var(--brand-ink);
 }
