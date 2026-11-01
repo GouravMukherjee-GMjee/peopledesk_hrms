@@ -1,0 +1,22 @@
+packages:
+  "framer-motion": "For premium smooth animations and scroll reveals"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility for merging tailwind classes without style conflicts"
+
+images:
+  - path: "artifacts/portfolio/public/images/hero-bg.png"
+    description: "Subtle, premium, abstract geometric mesh gradient in soft monochromatic tones (grays/whites), minimal and elegant, suitable for a light-themed designer portfolio background"
+    aspect_ratio: "16:9"
+  - path: "artifacts/portfolio/public/images/fieldequip-mockup.png"
+    description: "Clean, isometric 3D UI mockup of a complex B2B enterprise dashboard on a tablet, light theme, high-end minimal aesthetic, white background"
+    aspect_ratio: "4:3"
+  - path: "artifacts/portfolio/public/images/markerspro-mockup.png"
+    description: "Elegant UI mockup of an educational app dashboard with charts and floating cards, soft drop shadows, modern clean design, light theme"
+    aspect_ratio: "4:3"
+  - path: "artifacts/portfolio/public/images/design-system.png"
+    description: "A meticulously organized UI design system showcase, showing neat color palettes, typography scales, and button components aligned on a grid, white background"
+    aspect_ratio: "16:9"
+
+notes:
+  - No backend required, entirely static client-side application.
+  - Hardcoded data representing a portfolio.

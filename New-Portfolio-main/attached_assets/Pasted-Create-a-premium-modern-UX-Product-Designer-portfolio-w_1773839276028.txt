@@ -1,0 +1,111 @@
+Create a premium, modern UX/Product Designer portfolio website for a Senior UX Designer with 5+ years of experience in SaaS, Enterprise Applications, and EdTech platforms.
+
+The portfolio should be clean, minimal, and highly professional, inspired by top designers and companies like Google, Stripe, and Airbnb.
+
+👤 Designer Details:
+Name: Gourav Mukherjee  
+Role: Senior UX Designer | Product Designer  
+Experience: 5+ years  
+Specialization: SaaS, Field Service Management (FSM), Enterprise UX, EdTech  
+
+🎯 Portfolio Goal:
+- Attract recruiters from top product companies
+- Showcase strong UX thinking, case studies, and measurable impact
+- Highlight both design + frontend implementation skills
+- Position as a strategic product thinker, not just a UI designer
+
+🎨 Visual Style:
+- Clean, minimal, premium UI
+- Use modern typography (Inter / SF Pro style)
+- Soft shadows, subtle gradients, glassmorphism (optional)
+- Light theme with optional dark mode
+- Strong spacing and grid system
+- Micro-interactions and smooth animations
+
+📐 Website Structure:
+
+1. HERO SECTION
+- Strong headline: "Designing Scalable UX for Complex Products"
+- Subtext explaining expertise in SaaS & enterprise UX
+- CTA buttons: "View Case Studies" and "Download Resume"
+- Profile image or abstract illustration
+
+2. ABOUT SECTION
+- Short professional summary
+- Highlight:
+  - 5+ years experience
+  - SaaS & enterprise focus
+  - Data-driven UX decisions
+- Add key metrics:
+  - ↑30% engagement
+  - ↓25% bounce rate
+  - ↑25% task completion
+
+3. CASE STUDIES (MOST IMPORTANT)
+Create 2–3 detailed case studies:
+
+Case Study 1: FSM SaaS Platform (FieldEquip)
+- Problem
+- Research insights
+- UX process (flows, IA, wireframes)
+- Final UI
+- Impact (task efficiency +30%)
+
+Case Study 2: EdTech SaaS (MarkersPro)
+- Navigation restructuring
+- Engagement improvement
+- Mobile-first design
+- Impact metrics
+
+Each case study must include:
+- UX process (step-by-step)
+- Visuals (wireframes → UI)
+- Clear storytelling
+- Business impact
+
+4. SKILLS SECTION
+- UX: Research, Wireframing, Prototyping, IA
+- Product Thinking & Strategy
+- Design Systems
+- Tools: Figma, Adobe XD, Sketch
+- Frontend: HTML, CSS, Tailwind, JS
+- AI in UX (Prompt engineering, AI workflows)
+
+5. DESIGN SYSTEM SECTION (IMPORTANT)
+- Show components, tokens, scalability
+- Explain how it improved dev efficiency
+
+6. EXPERIENCE TIMELINE
+- Bursys Infotech (Senior UX Designer)
+- Wefivesoft (UI/UX + Frontend)
+- Show achievements, not responsibilities
+
+7. PROJECT HIGHLIGHTS / SNAPSHOT GRID
+- Cards with quick previews of work
+
+8. CONTACT SECTION
+- Email, LinkedIn
+- CTA: “Let’s build something impactful”
+
+⚡ UX DETAILS:
+- Sticky navigation
+- Smooth scrolling
+- Hover animations
+- Case study transitions
+- Responsive design (mobile-first)
+
+💻 TECH STACK (optional if generating code):
+- Next.js / React
+- Tailwind CSS
+- Framer Motion for animations
+
+🧠 IMPORTANT:
+- Focus more on UX thinking than visuals
+- Use storytelling approach
+- Show problem → process → solution → impact
+- Make it feel like a product case study, not a gallery
+
+🚀 OUTPUT:
+- Generate full portfolio layout + content
+- Include section-wise content + UI structure
+- Make it ready to convert into Figma or code

@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "cd artifacts/portfolio && pnpm install",
+  "buildCommand": "cd artifacts/portfolio && pnpm run build",
+  "outputDirectory": "artifacts/portfolio/dist/public"
+}
